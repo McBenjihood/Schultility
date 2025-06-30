@@ -1,0 +1,18 @@
+{
+  "name": "Schultility",
+  "description": "Schulnetz Utility Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "/html/index.html",
+    "default_icon": "/img/icon.png" 
+  },
+    "content_scripts": [
+        {
+            "js": ["js/popup.js"],
+            "matches": [
+                "https://schulnetz.lu.ch/fmz/index.php?pageid=21311*"
+            ]
+        }
+    ]
+}
