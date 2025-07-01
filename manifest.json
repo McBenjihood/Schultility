@@ -3,6 +3,10 @@
   "description": "Schulnetz Utility Extension",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
   "action": {
     "default_popup": "/html/index.html",
     "default_icon": "/img/icon.png" 
