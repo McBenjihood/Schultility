@@ -23,9 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const arrayAllPeriods = result2.periodList || [];
         return arrayAllPeriods;
     }   
-    console.log(retrieveDataTheGradeArray());
-    console.log(retrieveDataTheAvgGradeArray()); 
-    console.log(retrieveDataPeriodList()); 
+     
     printDataSelectionGrid(retrieveDataTheAvgGradeArray(), retrieveDataPeriodList());
 });
 
@@ -49,6 +47,9 @@ async function getAllGradesAverage() {
 }
 
 function printDataSelectionGrid(arrayAverageGradesUnrounded, arrayAllPeriods){
+
+    console.log(Array.from(arrayAverageGradesUnrounded)); 
+    console.log(Array.from(arrayAllPeriods));
 
     const node = document.createElement("div");
     node.classList.add("switchRow");
