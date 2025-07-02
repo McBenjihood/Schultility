@@ -91,6 +91,10 @@ function getAllPeriods(){
     let rawTds = document.querySelectorAll('.div_noten tbody tr > td:nth-of-type(1) > b');
     let TDArray = Array.from(rawTds).map(b_element => b_element.innerText);
 
+    console.log("Periods Array:");
+    console.log(TDArray);
+
+
     chrome.storage.local.set({ periodList: TDArray}, () => {
         console.log('Content Script: Grade array has been saved to chrome.storage.');
     });
