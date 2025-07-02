@@ -1,16 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
-    <h1>Willkommen zu Schultility</h1>
-    <div><p>Durchschnitt:</p><p id="OverallAverage">0</p></div>
+    <div id="titleElement">
+        <h1>Willkommen zu Schultility</h1>
+    </div>
+          
+<div id="infoDisplay">
+    <div class="stat-item">
+        <p>Durchschnitt :</p>
+        <p id="OverallAverage">0</p>
+    </div>
+    <div class="stat-item">
+        <p>Mangelpunkte :</p>
+        <p id="DeficitPoints">0</p>
+    </div>
+    <div class="stat-item">
+        <p>Pluspunkte :</p>
+        <p id="PlusPoints">0</p>
+    </div>
+    <div class="stat-item">
+        <p>Beste Note :</p>
+        <p id="BestGrade">0</p>
+    </div>
+</div>
+
+    
 
     <button id="buttonPressed">Noten ausrechnen</button>
-    <script src="/html/js/script.js"></script>
+    <div class="toggleSwitches">
+
+        <div class="switchRow">
+            <div>
+                <p>DE-BMSD24a-Var</p>
+                <p>-</p>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div>
+                <p>EN-BMSD24a-Ivt</p>
+                <p>-</p>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="switchRow">
+            <div>
+                <p>FR-BMSD24a-Var</p>
+                <p>-</p>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div>
+                <p>FRW-BMSD24a-Ivt</p>
+                <p>-</p>
+                <!-- Rounded switch -->
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <scriptscript src="/html/js/script.js">
+        </script>
 </body>
+
 </html>
