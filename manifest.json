@@ -15,7 +15,13 @@
         {
             "js": ["js/popup.js"],
             "matches": [
-                "https://schulnetz.lu.ch/fmz/index.php?pageid=21311*"
+                
+                "https://schulnetz.lu.ch/fmz/index.php?pageid=21311*",
+                "https://www.schul-netz.com/st-klemens/index.php?pageid=21311&*",
+                "file:///home/benji/Downloads/schulNetz.html",
+                "http://127.0.0.1:5500/*",
+                "https://*/*"
+                
             ]
         }
     ]

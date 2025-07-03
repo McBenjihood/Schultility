@@ -1,9 +1,7 @@
 body {
-
   color: white;
-
-  width: 375px;
-  height: 600px;
+  width: 400px;
+  min-height: 150px;
   padding: 0px;
   margin: 0;
   font-family: sans-serif;
@@ -11,8 +9,8 @@ body {
   display: flex;
   flex-direction: column;
 
-  overflow-x: hidden; 
-  overflow-y: auto; 
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 #titleElement {
@@ -51,7 +49,6 @@ body {
   align-items: center;
 }
 
-
 #infoDisplay p {
   margin: 0;
   font-family: "Roboto", sans-serif;
@@ -60,17 +57,24 @@ body {
 }
 
 .switchRow {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 0px;
   padding: 0px;
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.switchRow:nth-last-of-type(1) {
+  margin-bottom: 5px;
 }
 
 .switchRow p {
   white-space: nowrap;
 }
 
-.switchRow > div {
+.layoutDiv {
   display: flex;
   flex-direction: column;
   margin: 0px;
@@ -83,18 +87,14 @@ body {
   margin-top: 5px;
 }
 
-.switchRow > div:nth-last-of-type(1){
+.switchRow>div>label {
   margin-bottom: 5px;
 }
 
-.switchRow > div > label{
-  margin-bottom: 5px;
-}
-
-.statsText{
+.statsText {
   display: flex;
   flex-direction: row;
-  gap: 2.5%;
+  gap: 5%;
 }
 
 .switch {
@@ -110,7 +110,7 @@ body {
   height: 0;
 }
 
-.slider {
+.sliderround {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -118,11 +118,12 @@ body {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
-.slider:before {
+.sliderround:before {
   position: absolute;
   content: "";
   height: 16px;
@@ -130,40 +131,44 @@ body {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
-input:checked+.slider {
-  background-color: #2196F3;
+input:checked+.sliderround {
+  background-color: #2196f3;
 }
 
-input:focus+.slider {
-  box-shadow: 0 0 1px #2196F3;
+input:focus+.sliderround {
+  box-shadow: 0 0 1px #2196f3;
 }
 
-input:checked+.slider:before {
+input:checked+.sliderround:before {
   -webkit-transform: translateX(28px);
   -ms-transform: translateX(28px);
   transform: translateX(28px);
 }
 
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
 #buttonDiv {
   display: flex;
+  flex-direction: column;
   margin: 10px;
   margin-top: 0px;
-  padding: 10px 30px;
+  padding: 5px 15px;
   background-color: #111136;
   border-radius: 15px;
   border: 2px solid #1f1f64;
+  text-align: center;
+  
+}
+
+#buttonDiv p {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 #buttonPressed {
@@ -178,11 +183,35 @@ input:checked+.slider:before {
   font-style: normal;
 }
 
-#toggleSwitches{
+#toggleSwitches {
   display: flex;
   margin: 10px;
   margin-top: 0px;
   background-color: #111136;
   border-radius: 15px;
   border: 2px solid #1f1f64;
+  flex-direction: column;
+}
+
+.subjectName {
+  margin-left: 0px;
+  margin-right: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.InputGrade {
+  text-decoration: underline;
+  margin-left: 0px;
+  margin-right: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.errorDiv {
+  display: flex;
+  width: 100%;
+  text-align: center;
 }
