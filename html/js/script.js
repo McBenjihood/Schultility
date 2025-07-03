@@ -1,31 +1,11 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   const avgButton = document.getElementById("buttonPressed");
   if (avgButton) {
-    avgButton.addEventListener("click", getAllGradesAverage);
+    avgButton.addEventListener("click", printStats);
   }
 });
 
 document.addEventListener("DOMContentLoaded", async (event) => {
-  async function retrieveDataTheGradeArray() {
-    const result = await chrome.storage.local.get(["theGradeArray"]);
-    const arrayAllGradesUnrounded = result.theGradeArray || [];
-    return arrayAllGradesUnrounded;
-  }
-  async function retrieveDataTheAvgGradeArray() {
-    const result1 = await chrome.storage.local.get(["theAvgGradeArray"]);
-    const arrayAverageGradesUnrounded = result1.theAvgGradeArray || [];
-    return arrayAverageGradesUnrounded;
-  }
-  async function retrieveDataPeriodList() {
-    const result2 = await chrome.storage.local.get(["periodList"]);
-    const arrayAllPeriods = result2.periodList || [];
-    return arrayAllPeriods;
-  }
-
-  console.log(retrieveDataTheGradeArray());
-  console.log(retrieveDataTheAvgGradeArray());
-  console.log(retrieveDataPeriodList());
-
   let arrayBoolSwitches = [];
   for (let i = 0; i < (await retrieveDataTheAvgGradeArray().length); i++) {
     let bool = true;
@@ -38,16 +18,68 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   );
 });
 
-async function getAllGradesAverage() {
-  
+async function retrieveDataTheGradeArray() {
+  const result = await chrome.storage.local.get(["theGradeArray"]);
+  const arrayAllGradesUnrounded = result.theGradeArray || [];
+  return arrayAllGradesUnrounded;
+}
+async function retrieveDataTheAvgGradeArray() {
+  const result1 = await chrome.storage.local.get(["theAvgGradeArray"]);
+  const arrayAverageGradesUnrounded = result1.theAvgGradeArray || [];
+  return arrayAverageGradesUnrounded;
+}
+async function retrieveDataPeriodList() {
+  const result2 = await chrome.storage.local.get(["periodList"]);
+  const arrayAllPeriods = result2.periodList || [];
+  return arrayAllPeriods;
+}
+
+async function printStats() {
+  var checkedValue = document.querySelectorAll(".switchOutput");
+  let boolArray = [];
+  checkedValue.forEach((element) => {
+    boolArray.push(element.checked);
+  });
+  let gradesArray = await retrieveDataTheAvgGradeArray();
+  console.log(getSelectedGradesAverage(boolArray, gradesArray));
+  let insertElement = document.getElementById("OverallAverage");
+  insertElement.innerHTML = getSelectedGradesAverage(boolArray, gradesArray);
+}
+
+function getSelectedGradesAverage(boolArray, gradesArray) {
+  let indexCount = -1;
+  let gradeCalcNumber = 0;
+  let boolTrueCount = 0;
+  let array = roundGrades(gradesArray);
+  let arrayCheck = [];
+
+  array.forEach(element => {
+    if(element != 0){
+      arrayCheck.push(element);
+    }
+  });
+
+  boolArray.forEach((element) => {
+    indexCount++;
+    if (boolArray[indexCount] == true) {
+      boolTrueCount++;
+      gradeCalcNumber += arrayCheck[indexCount];
+      arrayCheck.push(arrayCheck[indexCount]);
+    }
+  });
+  console.log(arrayCheck);
+  console.log(boolTrueCount);
+  let  resultCalc = gradeCalcNumber / boolTrueCount;
+  resultCalc *= 1000;
+  resultCalc = Math.floor(resultCalc);
+  resultCalc /= 1000;
+  return resultCalc;
 }
 
 function printDataSelectionGrid(arrayAllPeriods, arrayAverageGradesUnrounded) {
   let index = arrayAverageGradesUnrounded.length;
-  console.log(index);
   let currentRow;
   for (let i = 0; i < index; i++) {
-    console.log(i);
     if (i % 2 == 0) {
       currentRow = document.createElement("div");
       currentRow.classList.add("switchRow");
@@ -84,6 +116,7 @@ function printDataSelectionGrid(arrayAllPeriods, arrayAverageGradesUnrounded) {
 
     const nodeF = document.createElement("input");
     nodeF.type = "checkbox";
+    nodeF.classList.add("switchOutput");
     nodeE.appendChild(nodeF);
 
     const nodeG = document.createElement("span");
