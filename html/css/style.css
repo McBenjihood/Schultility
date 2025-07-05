@@ -215,3 +215,29 @@ input:checked+.sliderround:before {
   width: 100%;
   text-align: center;
 }
+
+#profileDiv{
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  margin-top: 0px;
+  padding: 5px 15px;
+  background-color: #111136;
+  border-radius: 15px;
+  border: 2px solid #1f1f64;
+  text-align: center;
+  gap: 5px;
+}
+.profileButtons{
+  flex-grow: 1;
+  
+  justify-content: center;
+  width: auto;
+  padding: 5px;
+  border-radius: 15px;
+
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}

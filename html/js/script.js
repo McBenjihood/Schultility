@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", async (event) => {
     await retrieveDataPeriodList(),
     await retrieveDataTheAvgGradeArray()
   );
+
+  setToggledSwitches();
 });
 
 async function retrieveDataTheGradeArray() {
@@ -34,16 +36,88 @@ async function retrieveDataPeriodList() {
   return arrayAllPeriods;
 }
 
-async function printStats() {
+function getToggledSwitches() {
   var checkedValue = document.querySelectorAll(".switchOutput");
   let boolArray = [];
   checkedValue.forEach((element) => {
     boolArray.push(element.checked);
   });
-  let gradesArray = await retrieveDataTheAvgGradeArray();
-  console.log(getSelectedGradesAverage(boolArray, gradesArray));
-  let insertElement = document.getElementById("OverallAverage");
-  insertElement.innerHTML = getSelectedGradesAverage(boolArray, gradesArray);
+  return boolArray;
+}
+
+function setToggledSwitches(){
+  var checkedValue = document.querySelectorAll(".switchOutput");
+  let boolArray = [];
+  checkedValue.forEach((element) => {
+    element.checked = true;
+  });
+}
+
+async function printStats() {
+  //retrieving necessary data from chrome storage api
+  let theAvgGradeArray = await retrieveDataTheAvgGradeArray();
+  let theAllGradeArray = await retrieveDataTheGradeArray();
+
+  //printing average Grade from all selected grades.
+  let insertOverallAverage = document.getElementById("OverallAverage");
+  let tempResult = getSelectedGradesAverage(getToggledSwitches(),theAvgGradeArray);
+  if(isNaN(tempResult)){
+    tempResult = 0;
+  }
+  insertOverallAverage.innerHTML = tempResult;
+
+  //calculates best and worst grades using highly advanced ai powered matrix algorithms 
+
+  let insertBestGrade = document.getElementById("BestGrade");
+  insertBestGrade.innerHTML = highestLowestGrade(theAllGradeArray, 0);
+
+  let insertWorstGrade = document.getElementById("WorstGrade");
+  insertWorstGrade.innerHTML = highestLowestGrade(theAllGradeArray, 1);
+
+  //Calculating Deficitpoints
+  let insertDeficitPoints = document.getElementById("DeficitPoints");
+  insertDeficitPoints.innerHTML = getDeficitPoints(roundGrades(theAvgGradeArray), getToggledSwitches());
+}
+
+function getDeficitPoints(gradesArray, toggleSwitches){
+  let arrayCheck = [];
+
+
+  
+  gradesArray.forEach((element) => {
+    if (element != 0) {
+      arrayCheck.push(element);
+    }
+  });
+  let deficitPointsTotal = 0;
+  arrayCheck.forEach((element) => {
+    if (element < 4) {
+      let deficitPoint = 4 - element;
+      deficitPointsTotal += deficitPoint;
+    }
+  });
+}
+
+function highestLowestGrade(gradesArray, toggle) {
+  let highestGrade = 0;
+  let lowestGrade = 6;
+
+  if (toggle == 0) {
+    for (let i = 0; i < gradesArray.length; i++) {
+      if (gradesArray[i] > highestGrade) {
+        highestGrade = gradesArray[i];
+      }
+    }
+
+    return highestGrade;
+  } else {
+    for (let i = 0; i < gradesArray.length; i++) {
+      if (gradesArray[i] < lowestGrade) {
+        lowestGrade = gradesArray[i];
+      }
+    }
+    return lowestGrade;
+  }
 }
 
 function getSelectedGradesAverage(boolArray, gradesArray) {
@@ -53,8 +127,8 @@ function getSelectedGradesAverage(boolArray, gradesArray) {
   let array = roundGrades(gradesArray);
   let arrayCheck = [];
 
-  array.forEach(element => {
-    if(element != 0){
+  array.forEach((element) => {
+    if (element != 0) {
       arrayCheck.push(element);
     }
   });
@@ -67,9 +141,7 @@ function getSelectedGradesAverage(boolArray, gradesArray) {
       arrayCheck.push(arrayCheck[indexCount]);
     }
   });
-  console.log(arrayCheck);
-  console.log(boolTrueCount);
-  let  resultCalc = gradeCalcNumber / boolTrueCount;
+  let resultCalc = gradeCalcNumber / boolTrueCount;
   resultCalc *= 1000;
   resultCalc = Math.floor(resultCalc);
   resultCalc /= 1000;

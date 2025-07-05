@@ -17,7 +17,7 @@ function getAllGrades() {
         GradeArray.push(gradeNumber);
       } else {
         console.log(
-          `Warnung: Konnte keine Zahl aus dem Text "${gradeText.trim()}" extrahieren.`
+          `Couldn't extract grades...`
         );
       }
     }
