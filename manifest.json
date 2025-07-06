@@ -5,20 +5,11 @@
   "manifest_version": 3,
   "permissions": [
     "storage",
-    "activeTab"
+    "activeTab",
+    "scripting"
   ],
   "action": {
     "default_popup": "/html/index.html",
     "default_icon": "/img/icon.png" 
-  },
-    "content_scripts": [
-        {
-            "js": ["js/popup.js"],
-            "matches": [
-                
-                "https://*/*"
-                
-            ]
-        }
-    ]
+  }
 }
