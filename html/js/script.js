@@ -1,53 +1,127 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-  const avgButton = document.getElementById("buttonPressed");
-  if (avgButton) {
-    avgButton.addEventListener("click", printStats);
-  }
-});
-
-document.addEventListener("DOMContentLoaded", (event) => {
-  const profileButtonList = document.querySelectorAll("profileButtons");
-  profileButtonList = Array.from(profileButtonList);
-  if (profileButtonList) {
-    profileButtonList[0].addEventListener("click", setCurrentProfile(0));
-  }
-  if (profileButtonList) {
-    profileButtonList[1].addEventListener("click", setCurrentProfile(1));
-  }
-  if (profileButtonList) {
-    profileButtonList[2].addEventListener("click", setCurrentProfile(2));
-  }
-});
-
 document.addEventListener("DOMContentLoaded", async (event) => {
+  let profileButtonList = document.querySelectorAll(".profileButtons");
+  profileButtonList = Array.from(profileButtonList);
+  for (let i = 0; i < profileButtonList.length; i++) {
+    let valueAttr = Number(profileButtonList[i].getAttribute("value"));
+    profileButtonList[i].addEventListener("click", () => {
+      setCurrentProfile(valueAttr);
+    });
+  }
+
   printDataSelectionGrid(
     await retrieveDataPeriodList(),
     await retrieveDataTheAvgGradeArray()
   );
 
-  setCurrentProfile(0);
-});
-function getCurrentProfile(){
+  setCurrentProfile(3);
 
-}
-
-function setCurrentProfile(index){
-  let profilesArray = document.querySelectorAll("#profileDiv > button");
-  let prevSelected = 0;
-  for(let i = 0; i < profilesArray.length; i++){
-    if(profilesArray[i].id == "selectedProfile"){
-      prevSelected = i;
-    }
+  const avgButton = document.getElementById("buttonPressed");
+  if (avgButton) {
+    avgButton.addEventListener("click", printStats);
   }
-  //profilesArray[prevSelected].removeAttribute("id");
-  profilesArray[index].id("selectedProfile");
+
+  var checkboxes = document.querySelectorAll(".switchOutput");
+  let enabledSettings = [];
+
+  checkboxes.forEach(async function (checkbox) {
+    checkbox.addEventListener("change", async function () {
+      
+      let index = 0;
+
+      let profileButtonList = document.querySelectorAll(".profileButtons");
+      for (let i = 0; i < profileButtonList.length; i++) {
+        if (profileButtonList[i].getAttribute("id") == "selectedProfile") {
+          index = Number(profileButtonList[i].getAttribute("value"));
+        }
+      }
+
+      let nestedArray = await getAllProfiles();
+      let saveCurrentProfile = getToggledSwitches();
+      nestedArray[index] = saveCurrentProfile;
+
+      chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+        console.log(
+          "Content Script: Grade array has been saved to chrome.storage."
+        );
+      });
+    });
+  });
+});
+
+async function getCurrentProfile(index) {
+  const result = await chrome.storage.local.get(["arrayNestedProfiles"]);
+  const arrayNestedProfiles1 = result.arrayNestedProfiles || [];
+  return arrayNestedProfiles1[index];
 }
 
-function modifyCurrentProfile(){
-
+async function getAllProfiles() {
+  const result = await chrome.storage.local.get(["arrayNestedProfiles"]);
+  const arrayNestedProfiles1 = result.arrayNestedProfiles || [];
+  return arrayNestedProfiles1;
 }
 
+async function setCurrentProfile(index) {
+  if (index != 3) {
+    let profileButtonList = document.querySelectorAll(".profileButtons");
+    let prevIndex = 0;
+    for (let i = 0; i < profileButtonList.length; i++) {
+      if (profileButtonList[i].getAttribute("id") == "selectedProfile") {
+        prevIndex = Number(profileButtonList[i].getAttribute("value"));
+      }
+    }
+    profileButtonList[prevIndex].removeAttribute("id");
+    profileButtonList[index].id = "selectedProfile";
 
+    let nestedArray = await getAllProfiles();
+    let savePrevProfile = getToggledSwitches();
+    nestedArray[prevIndex] = savePrevProfile;
+
+    chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+      console.log(
+        "Content Script: Grade array has been saved to chrome.storage."
+      );
+    });
+    let currentSelectedProfile = await getCurrentProfile(index);
+    if (
+      currentSelectedProfile[0] == true ||
+      currentSelectedProfile[0] == false
+    ) {
+      setToggledSwitches(currentSelectedProfile);
+    } else {
+      let nestedArray = [];
+      for (let i = 0; i < 3; i++) {
+        let trueArray = [];
+        for (let i = 0; i < getToggledSwitches().length; i++) {
+          trueArray.push(true);
+        }
+        nestedArray.push(trueArray);
+      }
+      console.log(nestedArray);
+      chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+        console.log(
+          "Content Script: Grade array has been saved to chrome.storage."
+        );
+      });
+    }
+  } else {
+    let currentSelectedProfile = await getCurrentProfile(0);
+    if (
+      currentSelectedProfile[0] == true ||
+      currentSelectedProfile[0] == false
+    ) {
+      setToggledSwitches(currentSelectedProfile);
+    }
+    let nestedArray = await getAllProfiles();
+    let savePrevProfile = getToggledSwitches();
+    nestedArray[prevIndex] = savePrevProfile;
+
+    chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+      console.log(
+        "Content Script: Grade array has been saved to chrome.storage."
+      );
+    });
+  }
+}
 
 async function retrieveDataTheGradeArray() {
   const result = await chrome.storage.local.get(["theGradeArray"]);
@@ -70,8 +144,15 @@ function getToggledSwitches() {
   let boolArray = [];
   checkedValue.forEach((element) => {
     boolArray.push(element.checked);
+    console.log(element.checked);
   });
   return boolArray;
+}
+function setToggledSwitches(boolArray) {
+  var checkedValue = document.querySelectorAll(".switchOutput");
+  for (let i = 0; i < boolArray.length; i++) {
+    checkedValue[i].checked = boolArray[i];
+  }
 }
 
 async function printStats() {
@@ -99,11 +180,12 @@ async function printStats() {
 
   //Calculating Deficitpoints
   let insertDeficitPoints = document.getElementById("DeficitPoints");
-  insertDeficitPoints.innerHTML = getDeficitPoints(roundGrades(theAvgGradeArray));
+  insertDeficitPoints.innerHTML = getDeficitPoints(
+    roundGrades(theAvgGradeArray)
+  );
 
   //Calculating pluspoints
   let insertPlusPoints = document.getElementById("PlusPoints");
-  console.log(roundGrades(theAvgGradeArray));
   insertPlusPoints.innerHTML = getPlusPoints(roundGrades(theAvgGradeArray));
 }
 
@@ -124,7 +206,6 @@ function getToggledGrades(toggleSwitches, gradesArray) {
       arrayCheck.push(gradesArray[i]);
     }
   }
-
   return arrayCheck;
 }
 
