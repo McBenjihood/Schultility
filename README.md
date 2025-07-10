@@ -14,3 +14,12 @@ Schultility is a browser-extension which adds additional features to the Schulne
 
 If you have any problems with this extension, [e-mail](mailto:benjaminmikagerresheim@gmail.com) me or open an issue...
 
+### How to install Schultility?
+
+Schultility should be compatible with all chromium based browsers in theory. The extension was developed and tested for and on Chrome, so it works there for sure.
+
+**To install, click the Image below:**
+
+[<img alt="alt_text" width="300px" src="https://benjishomelab.ddns.net/img/img.png" />](https://chromewebstore.google.com/detail/schultility/gaohnlicaaajallonnghcpbkicfepion?authuser=0&hl=de&pli=1)
+
+
