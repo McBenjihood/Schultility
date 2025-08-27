@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
   checkboxes.forEach(async function (checkbox) {
     checkbox.addEventListener("change", async function () {
-      
       let index = 0;
 
       let profileButtonList = document.querySelectorAll(".profileButtons");
@@ -39,23 +38,31 @@ document.addEventListener("DOMContentLoaded", async (event) => {
       let saveCurrentProfile = getToggledSwitches();
       nestedArray[index] = saveCurrentProfile;
 
-      chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+      browser.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
         console.log(
-          "Content Script: Grade array has been saved to chrome.storage."
+          "Content Script: Grade array has been saved to browser.storage."
         );
       });
     });
   });
+
+  const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
+
+  if (isFirefox) {
+    console.log("Your browser is Firefox");
+  } else {
+    console.log("Your browser is not Firefox");
+  }
 });
 
 async function getCurrentProfile(index) {
-  const result = await chrome.storage.local.get(["arrayNestedProfiles"]);
+  const result = await browser.storage.local.get(["arrayNestedProfiles"]);
   const arrayNestedProfiles1 = result.arrayNestedProfiles || [];
   return arrayNestedProfiles1[index];
 }
 
 async function getAllProfiles() {
-  const result = await chrome.storage.local.get(["arrayNestedProfiles"]);
+  const result = await browser.storage.local.get(["arrayNestedProfiles"]);
   const arrayNestedProfiles1 = result.arrayNestedProfiles || [];
   return arrayNestedProfiles1;
 }
@@ -76,9 +83,9 @@ async function setCurrentProfile(index) {
     let savePrevProfile = getToggledSwitches();
     nestedArray[prevIndex] = savePrevProfile;
 
-    chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+    browser.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
       console.log(
-        "Content Script: Grade array has been saved to chrome.storage."
+        "Content Script: Grade array has been saved to browser.storage."
       );
     });
     let currentSelectedProfile = await getCurrentProfile(index);
@@ -97,9 +104,9 @@ async function setCurrentProfile(index) {
         nestedArray.push(trueArray);
       }
       console.log(nestedArray);
-      chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+      browser.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
         console.log(
-          "Content Script: Grade array has been saved to chrome.storage."
+          "Content Script: Grade array has been saved to browser.storage."
         );
       });
     }
@@ -115,26 +122,26 @@ async function setCurrentProfile(index) {
     let savePrevProfile = getToggledSwitches();
     nestedArray[prevIndex] = savePrevProfile;
 
-    chrome.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
+    browser.storage.local.set({ arrayNestedProfiles: nestedArray }, () => {
       console.log(
-        "Content Script: Grade array has been saved to chrome.storage."
+        "Content Script: Grade array has been saved to browser.storage."
       );
     });
   }
 }
 
 async function retrieveDataTheGradeArray() {
-  const result = await chrome.storage.local.get(["theGradeArray"]);
+  const result = await browser.storage.local.get(["theGradeArray"]);
   const arrayAllGradesUnrounded = result.theGradeArray || [];
   return arrayAllGradesUnrounded;
 }
 async function retrieveDataTheAvgGradeArray() {
-  const result1 = await chrome.storage.local.get(["theAvgGradeArray"]);
+  const result1 = await browser.storage.local.get(["theAvgGradeArray"]);
   const arrayAverageGradesUnrounded = result1.theAvgGradeArray || [];
   return arrayAverageGradesUnrounded;
 }
 async function retrieveDataPeriodList() {
-  const result2 = await chrome.storage.local.get(["periodList"]);
+  const result2 = await browser.storage.local.get(["periodList"]);
   const arrayAllPeriods = result2.periodList || [];
   return arrayAllPeriods;
 }
