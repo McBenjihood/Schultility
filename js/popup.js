@@ -1,3 +1,5 @@
+const browser = this.browser || this.chrome;
+
 function getAllGrades() {
   let rawTds = document.querySelectorAll(
     ".clean tbody tr .td_einzelpruefungen:nth-of-type(4)"
@@ -25,9 +27,9 @@ function getAllGrades() {
 
   console.log(GradeArray);
 
-  chrome.storage.local.set({ theGradeArray: GradeArray }, () => {
+  browser.storage.local.set({ theGradeArray: GradeArray }, () => {
     console.log(
-      "Content Script: Grade array has been saved to chrome.storage."
+      "Content Script: Grade array has been saved to browser.storage."
     );
   });
 }
@@ -63,11 +65,11 @@ function getAllAverageGrades() {
   console.log("averageGradesCollection:");
   console.log(averageGradesCollection);
 
-  chrome.storage.local.set(
+  browser.storage.local.set(
     { theAvgGradeArray: averageGradesCollection },
     () => {
       console.log(
-        "Content Script: Grade array has been saved to chrome.storage."
+        "Content Script: Grade array has been saved to browser.storage."
       );
     }
   );
@@ -82,9 +84,9 @@ function getAllPeriods() {
   console.log("Periods Array:");
   console.log(TDArray);
 
-  chrome.storage.local.set({ periodList: TDArray }, () => {
+  browser.storage.local.set({ periodList: TDArray }, () => {
     console.log(
-      "Content Script: Grade array has been saved to chrome.storage."
+      "Content Script: Grade array has been saved to browser.storage."
     );
   });
 }

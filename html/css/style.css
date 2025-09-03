@@ -40,19 +40,21 @@ body {
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 70px;
+  gap: 10px 20px;
 }
 
 .stat-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1em;
 }
 
 #infoDisplay p {
   margin: 0;
+  font-size: 1em;
   font-family: "Roboto", sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-style: normal;
 }
 
