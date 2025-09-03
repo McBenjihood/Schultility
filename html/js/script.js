@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   }
 
   var checkboxes = document.querySelectorAll(".switchOutput");
-  let enabledSettings = [];
 
   checkboxes.forEach(async function (checkbox) {
     checkbox.addEventListener("change", async function () {
@@ -48,8 +47,13 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
   const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
 
+  const styleFontSizeElements = document.querySelectorAll("#infoDisplay p");
+  console.log(styleFontSizeElements);
   if (isFirefox) {
     console.log("Your browser is Firefox");
+    for(let i = 0; i < styleFontSizeElements.length;i++){
+      styleFontSizeElements[i].style.fontSize = "0.8em"
+    }
   } else {
     console.log("Your browser is not Firefox");
   }
@@ -151,7 +155,6 @@ function getToggledSwitches() {
   let boolArray = [];
   checkedValue.forEach((element) => {
     boolArray.push(element.checked);
-    console.log(element.checked);
   });
   return boolArray;
 }
