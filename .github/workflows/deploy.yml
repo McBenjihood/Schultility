@@ -1,4 +1,4 @@
-name: Build and Deploy to Main
+name: Build Vue Popup and Commit to Main
 
 on:
   push:
@@ -6,32 +6,41 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
-  build:
+  build-and-commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main branch
         uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Checkout development branch for building
+        uses: actions/checkout@v4
+        with:
+          ref: development
+          path: ./.dev-build
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-
+          cache: 'npm'
       - name: Install dependencies and build
         run: |
-          npm i
+          cd ./.dev-build
+          npm ci
           npm run build
 
-      - name: Deploy to main branch
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Move new build to root
+        run: |
+          rm -rf ./dist
+          mv ./.dev-build/dist ./dist
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: main
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: "Deploy new build to dist"
+          commit_message: "build(vue): Update dist folder from development build"
+          branch: main
+          file_pattern: dist/*
