@@ -1,5 +1,5 @@
 <template>
-  <h1>Title</h1>
+  <h1>Titles</h1>
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
