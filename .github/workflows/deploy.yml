@@ -27,9 +27,11 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+          cache-dependency-path: ./.dev-build/package-lock.json
+
       - name: Install dependencies and build
+        working-directory: ./.dev-build
         run: |
-          cd ./.dev-build
           npm ci
           npm run build
 
