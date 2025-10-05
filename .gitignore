@@ -1,3 +1,4 @@
 # Private resources used for testing the extension.
 dev-resources
 node_modules
+html_backup
