@@ -18,12 +18,14 @@ const valueArray = ref([
   {
     id: 0,
     grade: 5.5,
-    subject: 'English'
+    subject: 'English',
+    selected: false
   },
   {
     id: 1,
     grade: 4,
-    subject: 'Deutsch'
+    subject: 'Deutsch',
+    selected: false
   },
   {
     id: 2,
@@ -44,7 +46,7 @@ const valueArray = ref([
       <p>{{item.subject}} :</p>
       <p>{{item.grade}}</p>
       <label class="switch">
-        <input type="checkbox" class="switchOutput" v-model="item.subject">
+        <input type="checkbox" class="switchOutput" v-model="item.selected">
         <span class="sliderround"></span>
       </label>
     </div>
