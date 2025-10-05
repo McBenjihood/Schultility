@@ -10,6 +10,6 @@
   ],
   "action": {
     "default_popup": "/html/index.html",
-    "default_icon": "/img/icon.png" 
+    "default_icon": "/html/img/icon.png"
   }
 }
