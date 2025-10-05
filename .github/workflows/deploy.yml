@@ -37,12 +37,12 @@ jobs:
 
       - name: Move new build to root
         run: |
-          rm -rf ./dist
-          mv ./.dev-build/dist ./dist
+          rm -rf ./html
+          mv ./.dev-build/html ./html
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "build(vue): Update dist folder from development build"
+          commit_message: "build(vue): Update html folder from development build"
           branch: main
-          file_pattern: dist/*
+          file_pattern: html/*
