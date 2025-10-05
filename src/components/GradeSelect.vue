@@ -20,18 +20,6 @@ const valueArray = ref([
     grade: 5.5,
     subject: 'English',
     selected: false
-  },
-  {
-    id: 1,
-    grade: 4,
-    subject: 'Deutsch',
-    selected: false
-  },
-  {
-    id: 2,
-    grade: 5,
-    subject: 'M259',
-    selected: false
   }
 ])
 </script>
