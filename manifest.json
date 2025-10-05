@@ -9,7 +9,7 @@
     "scripting"
   ],
   "action": {
-    "default_popup": "/html/index.html",
+    "default_popup": "/dist/index.html",
     "default_icon": "/img/icon.png" 
   }
 }
