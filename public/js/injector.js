@@ -4,6 +4,6 @@ browser.tabs.query({ active: true, currentWindow: true }, function(tabs) {
 
   browser.scripting.executeScript({
     target: { tabId: currentTabId },
-    files: ['/html/js/injected.js']
+    files: ['js/injected.js']
   });
 });

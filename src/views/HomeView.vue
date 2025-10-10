@@ -1,11 +1,68 @@
 <script setup lang="ts">
 import gradeSelector from '/src/components/GradeSelect.vue';
- import {ref} from "vue";
- let averageGrade = ref(10);
- let deficitPoints = ref(9);
- let plusPoints = ref(8);
- let bestGrade = ref(7);
- let worstGrade = ref(6);
+import {computed, onMounted, ref} from "vue";
+const allGradesArray = ref<number[]>([]);
+const avgGradeArray = ref<number[]>([]);
+const subjectArray = ref<number[]>([]);
+
+async function retrieveDataTheGradeArray() {
+  const result = await chrome.storage.local.get(["theGradeArray"]);
+  return result.theGradeArray || [];
+}
+async function retrieveDataTheAvgGradeArray() {
+  const result = await chrome.storage.local.get(["theAvgGradeArray"]);
+  return result.theAvgGradeArray || [];
+}
+async function retrieveDataSubjectList() {
+  const result = await chrome.storage.local.get(["periodList"]);
+  return result.periodList || [];
+}
+onMounted(async () => {
+  allGradesArray.value = await retrieveDataTheGradeArray();
+  //console.log(allGradesArray.value);
+  avgGradeArray.value = await retrieveDataTheAvgGradeArray();
+  //console.log(avgGradeArray.value);
+  subjectArray.value = await retrieveDataSubjectList();
+  //console.log(subjectArray.value);
+
+  removeEmptySubjects()
+  avgGradeArray.value = roundArray(avgGradeArray.value);
+})
+
+ let averageGrade = computed(() => {
+   return 0;
+ });
+ let deficitPoints = computed(() => {
+   return 0;
+ });
+ let plusPoints = computed(() => {
+   return 0;
+ });
+ let bestGrade = computed(() => {
+   return 0;
+ });
+ let worstGrade = computed(() => {
+   return 0;
+ });
+
+ function removeEmptySubjects() {
+   avgGradeArray.value.forEach((element: number, index: number) => {
+     if(element == 0){
+       avgGradeArray.value.splice(index, 1);
+       subjectArray.value.splice(index, 1);
+     }
+   })
+ }
+
+function roundArray(array : number[]){
+  array.forEach((element: number,index: number) => {
+    array[index] =  Math.round(element * 2) / 2;
+  })
+  return array;
+}
+
+
+
 </script>
 
 <template>
