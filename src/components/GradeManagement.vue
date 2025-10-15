@@ -15,22 +15,13 @@ const profilesArray = ref([
     text: 'Profile 3'
   },
 ])
-const valueArray = ref([
-  {
-    id: 0,
-    grade: 5.5,
-    subject: 'English',
-    selected: true
-  },
-  {
-    id: 1,
-    grade: 5,
-    subject: 'Deutsch',
-    selected: false
-  }
-])
+const props = defineProps(
+    {
+      dataArray: Array
+    }
+)
 function toggleSubject(id: any){
-  const index = valueArray.value.findIndex((obj) => obj.id === id)
+  const index = props.dataArray.findIndex((obj) => obj.id === id)
   valueArray.value[index].selected = !valueArray.value[index].selected
 }
 </script>
@@ -45,7 +36,7 @@ function toggleSubject(id: any){
   </div>
   <hr>
   <subject-toggle
-      v-for="item in valueArray"
+      v-for="item in dataArray"
       :key="item.id"
       :id = item.id
       :grade = item.grade

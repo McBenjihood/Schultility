@@ -23,14 +23,18 @@ function getAllGrades() {
             }
         }
     }
-    console.log("AllGrades Array:");
-    console.log(GradeArray);
+    if (GradeArray.length > 0) {
+        console.log("AllGrades Array:");
+        console.log(GradeArray);
+        browser.storage.local.set({ theGradeArray: GradeArray }, () => {
+            console.log(
+                "Content Script: Grade array has been saved to browser.storage."
+            );
+        });
+    }else{
+        console.log("Schultility-Extension: No Grades detected on this Site. Not saving anything");
+    }
 
-    browser.storage.local.set({ theGradeArray: GradeArray }, () => {
-        console.log(
-            "Content Script: Grade array has been saved to browser.storage."
-        );
-    });
 }
 
 function getAllAverageGrades() {
@@ -61,17 +65,20 @@ function getAllAverageGrades() {
     }
     averageGradesCollection.shift();
 
-    console.log("averageGradesCollection Array:");
-    console.log(averageGradesCollection);
 
-    browser.storage.local.set(
-        { theAvgGradeArray: averageGradesCollection },
-        () => {
+
+    if (averageGradesCollection.length > 0) {
+        console.log("averageGradesCollection Array:");
+        console.log(averageGradesCollection);
+        browser.storage.local.set({ theAvgGradeArray: averageGradesCollection }, () => {
             console.log(
                 "Content Script: Grade array has been saved to browser.storage."
             );
-        }
-    );
+        });
+    }else{
+        console.log("Schultility-Extension: No average Grades detected on this Site. Not saving anything");
+    }
+
 }
 
 function getAllPeriods() {
@@ -80,14 +87,18 @@ function getAllPeriods() {
     );
     let TDArray = Array.from(rawTds).map((b_element) => b_element.innerText);
 
-    console.log("Periods Array:");
-    console.log(TDArray);
 
-    browser.storage.local.set({ periodList: TDArray }, () => {
-        console.log(
-            "Content Script: Grade array has been saved to browser.storage."
-        );
-    });
+    if (TDArray.length > 0) {
+        console.log("Periods Array:");
+        console.log(TDArray);
+        browser.storage.local.set({ periodList: TDArray }, () => {
+            console.log(
+                "Content Script: Grade array has been saved to browser.storage."
+            );
+        });
+    }else{
+        console.log("Schultility-Extension: No average Grades detected on this Site. Not saving anything");
+    }
 }
 
 getAllGrades();
