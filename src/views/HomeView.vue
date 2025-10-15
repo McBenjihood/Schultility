@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import gradeSelector from '/src/components/GradeSelect.vue';
+import gradeSelector from '/src/components/GradeManagement.vue';
 import {computed, onMounted, ref} from "vue";
 const allGradesArray = ref<number[]>([]);
 const avgGradeArray = ref<number[]>([]);
@@ -19,14 +19,20 @@ async function retrieveDataSubjectList() {
 }
 onMounted(async () => {
   allGradesArray.value = await retrieveDataTheGradeArray();
-  //console.log(allGradesArray.value);
+  console.log("AllGradesArray: " + allGradesArray.value);
   avgGradeArray.value = await retrieveDataTheAvgGradeArray();
-  //console.log(avgGradeArray.value);
+  console.log("avgGradesArray: " + avgGradeArray.value);
   subjectArray.value = await retrieveDataSubjectList();
-  //console.log(subjectArray.value);
+  console.log("subjectArray: " + subjectArray.value);
 
+  console.log(avgGradeArray.value)
+  console.log(subjectArray.value)
   removeEmptySubjects()
+  console.log(avgGradeArray.value)
+  console.log(subjectArray.value)
+
   avgGradeArray.value = roundArray(avgGradeArray.value);
+
 })
 
  let averageGrade = computed(() => {
@@ -45,7 +51,7 @@ onMounted(async () => {
    return 0;
  });
 
- function removeEmptySubjects() {
+function removeEmptySubjects() {
    avgGradeArray.value.forEach((element: number, index: number) => {
      if(element == 0){
        avgGradeArray.value.splice(index, 1);
@@ -53,16 +59,15 @@ onMounted(async () => {
      }
    })
  }
-
+function removeEmptyGrades(){
+  return 0;
+}
 function roundArray(array : number[]){
   array.forEach((element: number,index: number) => {
     array[index] =  Math.round(element * 2) / 2;
   })
   return array;
 }
-
-
-
 </script>
 
 <template>
