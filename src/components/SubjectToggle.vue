@@ -1,11 +1,11 @@
 <script setup lang="ts">
 defineProps({
-  id: Number,
+  index: Number,
   grade: Number,
   subjectName: String,
   selected: Boolean
 })
-defineEmits(['toggleSubject'])
+defineEmits(['toggle-Subject'])
 </script>
 
 <template>
@@ -13,7 +13,7 @@ defineEmits(['toggleSubject'])
       <p>{{subjectName}} :</p>
       <p>{{grade}}</p>
       <label class="switch">
-        <input type="checkbox" class="switchOutput" :checked="selected" @click="$emit('toggle-Subject',id)">
+        <input type="checkbox" class="switchOutput" :checked="selected" @click="$emit('toggle-Subject',index)">
         <span class="sliderround"></span>
       </label>
     </div>

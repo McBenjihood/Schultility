@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SubjectToggle from "@/components/SubjectToggle.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+//Array containing all existing Profiles.
 const profilesArray = ref([
   {
     id: 0,
@@ -15,14 +16,64 @@ const profilesArray = ref([
     text: 'Profile 3'
   },
 ])
-const props = defineProps(
-    {
-      dataArray: Array
-    }
-)
-function toggleSubject(id: any){
-  const index = props.dataArray.findIndex((obj) => obj.id === id)
-  valueArray.value[index].selected = !valueArray.value[index].selected
+
+//Interface for the Object Array that gets passed as Props to define types for values.
+interface ObjectArray {
+  index: number,
+  grade: number,
+  subject: string
+}
+//Defining Props for this Component
+defineProps<{
+  DataArray: ObjectArray[],
+}>()
+
+//Value representing currently selected Profile.
+let selectedProfileID = 0;
+
+//Array that the ProfileConfigArray that gets pulled from storage gets saved into.
+let ProfileConfigArray: object[] = [];
+
+//async function retrieving ProfileConfigArray from browser.local storage. If no data was able to bhe retrieved as no data was ever saved to Browser storage, it just returns an empty array.
+async function retrieveProfileConfigArray() {
+  const result = await chrome.storage.local.get(["ProfileConfigArray_BROWSER_STORAGE"]);
+  return result.theGradeArray || [];
+}
+//Loads the ProfileConfigArray Array on Mount and then assigns it to a variable.
+onMounted(async () => {
+  ProfileConfigArray = await retrieveProfileConfigArray();
+})
+
+
+
+//Function that sets the selected Profile to the Profile corresponding to the Button the user pressed.
+function changeProfile(profileID: number){
+  selectedProfileID = profileID;
+}
+//Function to toggle Subject on or off when pressing the Switch. Further Detail on functionality below.
+function toggleSubject(index: number){
+  const obj = {
+    ProfileID: selectedProfileID,
+    SubjectIndex: index
+  }
+  const checkIndex = ProfileConfigArray.findIndex((object) => object.ProfileID == obj.ProfileID && object.SubjectIndex == obj.SubjectIndex)
+  if(checkIndex != -1){
+    //Entry already exists and will be toggled now / deleted from this array
+    console.log("Exists")
+    ProfileConfigArray.splice(checkIndex, 1)
+    console.log(ProfileConfigArray)
+  }else {
+    console.log("Doesnt Exist yet")
+    //Entry doesnt exist, and will be saved to browser Storage
+    ProfileConfigArray.push(obj);
+    console.log(ProfileConfigArray)
+  }
+  chrome.storage.local.set({ ProfileConfigArray_BROWSER_STORAGE: ProfileConfigArray }, () => {
+    console.log("Content Script: Grade array has been saved to browser.storage.");
+  });
+}
+function getSelected(){
+
 }
 </script>
 
@@ -32,16 +83,17 @@ function toggleSubject(id: any){
         v-for="item in profilesArray"
         :key="item.id"
         class="selectButton"
+        @click="changeProfile(item.id)"
     >{{item.text}}</button>
   </div>
   <hr>
   <subject-toggle
-      v-for="item in dataArray"
-      :key="item.id"
-      :id = item.id
+      v-for="item in DataArray"
+      :key=item.index
+      :index = item.index
       :grade = item.grade
+      :selected = getSelected()
       :subject-name = item.subject
-      :selected = item.selected
       @toggle-Subject="toggleSubject"
   ></subject-toggle>
 </template>
