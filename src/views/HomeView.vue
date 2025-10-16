@@ -60,7 +60,8 @@ function roundArray(array : number[]){
     <Statistics></Statistics>
     <div class="GradeSelectClass">
       <grade-manager
-      :DataArray="DataArray"></grade-manager>
+      :DataArray="DataArray"
+      @data-emitted="data-emitted"></grade-manager>
     </div>
   </div>
 </template>

@@ -17,7 +17,13 @@ const profilesArray = ref([
   },
 ])
 
+const emit = defineEmits(['data-emitted'])
+
 //Interface for the Object Array that gets passed as Props to define types for values.
+interface SelectedSubjects {
+  ProfileID: number,
+  SubjectIndex: number
+}
 interface ObjectArray {
   index: number,
   grade: number,
@@ -29,51 +35,62 @@ defineProps<{
 }>()
 
 //Value representing currently selected Profile.
-let selectedProfileID = 0;
+let selectedProfileID = ref(0);
 
 //Array that the ProfileConfigArray that gets pulled from storage gets saved into.
-let ProfileConfigArray: object[] = [];
+let ProfileConfigArray = ref<SelectedSubjects[]>([])
 
 //async function retrieving ProfileConfigArray from browser.local storage. If no data was able to bhe retrieved as no data was ever saved to Browser storage, it just returns an empty array.
 async function retrieveProfileConfigArray() {
   const result = await chrome.storage.local.get(["ProfileConfigArray_BROWSER_STORAGE"]);
-  return result.theGradeArray || [];
+  return result.ProfileConfigArray_BROWSER_STORAGE || [];
 }
 //Loads the ProfileConfigArray Array on Mount and then assigns it to a variable.
 onMounted(async () => {
-  ProfileConfigArray = await retrieveProfileConfigArray();
+  ProfileConfigArray.value = await retrieveProfileConfigArray();
 })
 
-
+function checkIndexValue(array: object[], index: number){
+  const obj = {
+    ProfileID: selectedProfileID.value,
+    SubjectIndex: index
+  }
+  return array.findIndex((object) => object.ProfileID == obj.ProfileID && object.SubjectIndex == obj.SubjectIndex)
+}
 
 //Function that sets the selected Profile to the Profile corresponding to the Button the user pressed.
 function changeProfile(profileID: number){
-  selectedProfileID = profileID;
+  selectedProfileID.value = profileID;
 }
 //Function to toggle Subject on or off when pressing the Switch. Further Detail on functionality below.
 function toggleSubject(index: number){
-  const obj = {
-    ProfileID: selectedProfileID,
-    SubjectIndex: index
-  }
-  const checkIndex = ProfileConfigArray.findIndex((object) => object.ProfileID == obj.ProfileID && object.SubjectIndex == obj.SubjectIndex)
+  const checkIndex = checkIndexValue(ProfileConfigArray.value, index);
   if(checkIndex != -1){
     //Entry already exists and will be toggled now / deleted from this array
     console.log("Exists")
-    ProfileConfigArray.splice(checkIndex, 1)
-    console.log(ProfileConfigArray)
+    ProfileConfigArray.value.splice(checkIndex, 1)
   }else {
     console.log("Doesnt Exist yet")
     //Entry doesnt exist, and will be saved to browser Storage
-    ProfileConfigArray.push(obj);
-    console.log(ProfileConfigArray)
+    ProfileConfigArray.value.push({
+      ProfileID: selectedProfileID.value,
+      SubjectIndex: index
+    });
   }
   chrome.storage.local.set({ ProfileConfigArray_BROWSER_STORAGE: ProfileConfigArray }, () => {
+    console.log(ProfileConfigArray.value);
     console.log("Content Script: Grade array has been saved to browser.storage.");
+    emit('data-emitted', ProfileConfigArray.value);
   });
 }
-function getSelected(){
 
+function getSelected(index: number){
+ const checkIndex = checkIndexValue(ProfileConfigArray.value, index);
+ if(checkIndex != -1){
+   return true;
+ }else{
+   return false;
+ }
 }
 </script>
 
@@ -92,7 +109,7 @@ function getSelected(){
       :key=item.index
       :index = item.index
       :grade = item.grade
-      :selected = getSelected()
+      :selected = getSelected(item.index)
       :subject-name = item.subject
       @toggle-Subject="toggleSubject"
   ></subject-toggle>
