@@ -1,67 +1,64 @@
 <script setup lang="ts">
+//Imports
 import GradeManager from '/src/components/GradeManagement.vue';
 import Statistics from '/src/components/gradeStatistics.vue';
-
 import {onMounted, ref} from "vue";
+import {prepareData} from "@/assets/prepareData";
 
-const allGradesArray = ref<number[]>([]);
-const avgGradeArray = ref<number[]>([]);
-const subjectArray = ref<number[]>([]);
-const DataArray = ref<object>([])
 
-async function retrieveDataTheGradeArray() {
-  const result = await chrome.storage.local.get(["theGradeArray"]);
-  return result.theGradeArray || [];
-}
-async function retrieveDataTheAvgGradeArray() {
-  const result = await chrome.storage.local.get(["theAvgGradeArray"]);
-  return result.theAvgGradeArray || [];
-}
-async function retrieveDataSubjectList() {
-  const result = await chrome.storage.local.get(["periodList"]);
-  return result.periodList || [];
+//DataArray contains GradeIndex, Grade itself and the subject name.
+const DataArray = ref<object[]>([])
+//ConfigArray contains Objects which contain GradeIndex and profileID of Toggled Grade.
+const ConfigArray = ref<object[]>([]);
+//activeProfileID contains the Number corresponding to the current active Profile.
+let ActiveProfileID = ref<number>(0);
+
+//Functions retrieving Data from Browser storage.
+async function retrieveData() {
+  const result = await chrome.storage.local.get(["STORAGE_DataArray"]);
+  return result.STORAGE_DataArray || [];
 }
 
+//async function retrieving ProfileConfigArray from browser.local storage. If no data was able to bhe retrieved as no data was ever saved to Browser storage, it just returns an empty array.
+async function retrieveProfileConfigArray() {
+  const result = await chrome.storage.local.get(["ProfileConfigArray_BROWSER_STORAGE"]);
+  return result.ProfileConfigArray_BROWSER_STORAGE || [];
+}
+
+
+//Retrieving Data from Browser Storage and getting ToggleConfigs from Storage aswell.
 onMounted(async () => {
-  allGradesArray.value = await retrieveDataTheGradeArray();
-  avgGradeArray.value = await retrieveDataTheAvgGradeArray();
-  subjectArray.value = await retrieveDataSubjectList();
+  //Saving Array from Browser storage, to local variables.
+  DataArray.value = await retrieveData();
+  console.log(DataArray.value);
 
-  DataArray.value = prepareData()
+  //Assigning local Variables their manipulated Data, which can then be passed to other components for further use.
+  ConfigArray.value = await retrieveProfileConfigArray();
+  console.log(ConfigArray.value);
 })
 
- function prepareData(){
-   let Array = removeEmptySubjects(subjectArray.value, avgGradeArray.value);
-   let finalArray = Array.map((object,index) => {
-       return {index: index, subject: object.subject, grade: object.grade}
-   })
-   console.log(finalArray);
-   return finalArray;
- }
-function removeEmptySubjects(SubjectArray: number[],GradeArray: number[]) {
-  const combined = SubjectArray.map((subject, index) => {
-    return { subject: subject, grade: GradeArray[index] };
-  });
-  return combined.filter((subject) => subject.grade !== 0);
+//Assignes emited Values to local variables (ConfigArray, activeProfileID)
+function updateToggles(arr: Array<any>) {
+  ConfigArray.value = arr;
 }
-/*
-function roundArray(array : number[]){
-  array.forEach((element: number,index: number) => {
-    array[index] =  Math.round(element * 2) / 2;
-  })
-  return array;
+function updateActiveProfileID(num: number) {
+  ActiveProfileID.value = num;
 }
-*/
-
 </script>
 
 <template>
   <div class="home">
-    <Statistics></Statistics>
+    <Statistics
+        :PropConfigArray="ConfigArray"
+        :PropDataArray="DataArray"
+        :profileID = "activeProfileID"
+    ></Statistics>
     <div class="GradeSelectClass">
       <grade-manager
       :DataArray="DataArray"
-      @data-emitted="data-emitted"></grade-manager>
+      :ConfigArray="ConfigArray"
+      @emitToggles="updateToggles"
+      @emitID="updateActiveProfileID"></grade-manager> <!-- Save emitted data into DataArray which is ref and should update values in child components hopefully -->
     </div>
   </div>
 </template>

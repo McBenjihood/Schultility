@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import SubjectToggle from "@/components/SubjectToggle.vue";
-import {onMounted, ref} from "vue";
+import {ref, toRaw, watch} from "vue";
 //Array containing all existing Profiles.
 const profilesArray = ref([
   {
@@ -17,7 +17,7 @@ const profilesArray = ref([
   },
 ])
 
-const emit = defineEmits(['data-emitted'])
+const emit = defineEmits(['emitToggles', 'emitID'])
 
 //Interface for the Object Array that gets passed as Props to define types for values.
 interface SelectedSubjects {
@@ -26,12 +26,14 @@ interface SelectedSubjects {
 }
 interface ObjectArray {
   index: number,
-  grade: number,
-  subject: string
+  subject: string,
+  avg: number,
+  grades: number[]
 }
 //Defining Props for this Component
-defineProps<{
+const props = defineProps<{
   DataArray: ObjectArray[],
+  ConfigArray: SelectedSubjects[]
 }>()
 
 //Value representing currently selected Profile.
@@ -40,15 +42,9 @@ let selectedProfileID = ref(0);
 //Array that the ProfileConfigArray that gets pulled from storage gets saved into.
 let ProfileConfigArray = ref<SelectedSubjects[]>([])
 
-//async function retrieving ProfileConfigArray from browser.local storage. If no data was able to bhe retrieved as no data was ever saved to Browser storage, it just returns an empty array.
-async function retrieveProfileConfigArray() {
-  const result = await chrome.storage.local.get(["ProfileConfigArray_BROWSER_STORAGE"]);
-  return result.ProfileConfigArray_BROWSER_STORAGE || [];
-}
-//Loads the ProfileConfigArray Array on Mount and then assigns it to a variable.
-onMounted(async () => {
-  ProfileConfigArray.value = await retrieveProfileConfigArray();
-})
+watch(() => props.ConfigArray, (loadedConfig) => {
+  ProfileConfigArray.value = loadedConfig;
+}, { deep: true });
 
 function checkIndexValue(array: object[], index: number){
   const obj = {
@@ -61,28 +57,40 @@ function checkIndexValue(array: object[], index: number){
 //Function that sets the selected Profile to the Profile corresponding to the Button the user pressed.
 function changeProfile(profileID: number){
   selectedProfileID.value = profileID;
+  emitID();
 }
+
 //Function to toggle Subject on or off when pressing the Switch. Further Detail on functionality below.
 function toggleSubject(index: number){
   const checkIndex = checkIndexValue(ProfileConfigArray.value, index);
   if(checkIndex != -1){
     //Entry already exists and will be toggled now / deleted from this array
-    console.log("Exists")
     ProfileConfigArray.value.splice(checkIndex, 1)
   }else {
-    console.log("Doesnt Exist yet")
     //Entry doesnt exist, and will be saved to browser Storage
     ProfileConfigArray.value.push({
       ProfileID: selectedProfileID.value,
       SubjectIndex: index
     });
   }
-  chrome.storage.local.set({ ProfileConfigArray_BROWSER_STORAGE: ProfileConfigArray }, () => {
-    console.log(ProfileConfigArray.value);
-    console.log("Content Script: Grade array has been saved to browser.storage.");
-    emit('data-emitted', ProfileConfigArray.value);
+
+  //Uses imported toRaw Function to save the original data of a Vue created Proxy-Object-thingy.
+  const rawConfigArray = toRaw(ProfileConfigArray.value);
+  chrome.storage.local.set({ ProfileConfigArray_BROWSER_STORAGE: rawConfigArray }, () => {
+    emitToggles();
   });
 }
+
+
+function emitToggles(){
+  emit("emitToggles", ProfileConfigArray.value); // -> Emit the toggled Profiles so the stats can be calculated correctly with only selected grades counting.
+}
+
+function emitID(){
+  emit("emitID", selectedProfileID.value); // -> Emit the activeProfileID so the stats can be calculated correctly with only selected grades counting.
+}
+
+
 
 function getSelected(index: number){
  const checkIndex = checkIndexValue(ProfileConfigArray.value, index);
@@ -99,16 +107,18 @@ function getSelected(index: number){
     <button
         v-for="item in profilesArray"
         :key="item.id"
-        class="selectButton"
         @click="changeProfile(item.id)"
+        class="selectButton"
+        v-bind:class="{active : item.id == selectedProfileID}"
     >{{item.text}}</button>
   </div>
   <hr>
   <subject-toggle
       v-for="item in DataArray"
+      :profileID="selectedProfileID"
       :key=item.index
       :index = item.index
-      :grade = item.grade
+      :grade = item.avg
       :selected = getSelected(item.index)
       :subject-name = item.subject
       @toggle-Subject="toggleSubject"
@@ -140,5 +150,9 @@ hr{
 }
 .selectButton:hover {
   background-color: #46627f; /* Lighter Blue Gray on hover */
+}
+
+.active{
+  background-color: #20203b;
 }
 </style>
