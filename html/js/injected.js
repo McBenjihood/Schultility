@@ -1,43 +1,69 @@
-const browser = this.browser || this.chrome;
+function getData() {
+    const AllGrades = getAllGrades();
+    let AllAVGGrades = getAllAVGGrades();
+    const AllPeriods = getAllPeriods();
 
-function getAllGrades() {
-    let rawTds = document.querySelectorAll(
-        ".clean tbody tr .td_einzelpruefungen:nth-of-type(4)"
-    );
-    let TDArray = Array.from(rawTds);
+    removeEmptyEntries(AllAVGGrades, AllPeriods);
 
-    let GradeArray = [];
+    const DataArray = AllGrades.map((grades, index) => {
+        return {index: index,subject: AllPeriods[index], avg: AllAVGGrades[index], grades: grades};
+    });
 
-    for (let i = 0; i < TDArray.length; i++) {
-        const tdElement = TDArray[i];
-        if (tdElement.childNodes.length > 0) {
-            let gradeText = tdElement.childNodes[0].nodeValue;
-            let gradeNumber = Number(gradeText.trim());
-
-            if (!isNaN(gradeNumber)) {
-                GradeArray.push(gradeNumber);
-            } else {
-                console.log(
-                    `Couldn't extract grades...`
-                );
-            }
-        }
-    }
-    if (GradeArray.length > 0) {
-        console.log("AllGrades Array:");
-        console.log(GradeArray);
-        browser.storage.local.set({ theGradeArray: GradeArray }, () => {
-            console.log(
-                "Content Script: Grade array has been saved to browser.storage."
-            );
+    if (DataArray.length > 0) {
+        console.log("Extracted Data:");
+        console.log(DataArray);
+        browser.storage.local.set({ STORAGE_DataArray: DataArray }, () => {
+            console.log("Content Script: Grade array has been saved to browser.storage.");
         });
     }else{
         console.log("Schultility-Extension: No Grades detected on this Site. Not saving anything");
     }
+}
+function getAllGrades(){
+    // Extracting tbody elements from html, to later group grades together.
+    let rawNodes = document.querySelectorAll(
+        ".clean tbody"
+    );
+    let NodesArray = Array.from(rawNodes);
 
+    const finalResult = [];
+    NodesArray.forEach((parentNode) => {
+
+        //Filtering out unneeded HTML Elements, to only get elements, containing Grade-Data
+        const allChildren = Array.from(parentNode.childNodes);
+        const evenNodes = allChildren.filter((_, index) => index % 2 === 0);
+        const slicedNodes = evenNodes.slice(2);
+        const trElements = slicedNodes.filter((node) => {
+            return !node.classList.contains('last_line_top_pruefungsgruppe');
+        });
+
+        //Extracting Grade-Data from remaining HTML Elements and saving the extracted Grades to Array
+        const extractedNumbers = [];
+        trElements.forEach((tr) => {
+            const targetNode = tr.childNodes[7];
+            if (targetNode && targetNode.firstChild) {
+                const rawText = targetNode.firstChild.textContent.trim();
+                if (rawText !== "") {
+                    extractedNumbers.push(rawText);
+                }
+            }
+        });
+        //Array only containing Grade from specific subject gets added to Array containing all Grades for each Subject
+        if (extractedNumbers.length > 0) {
+            finalResult.push(extractedNumbers);
+        }
+    });
+
+    //return finalResult;
+
+    return finalResult.map((element) => {
+        return element.map((element) => {
+            return Number(element);
+        })
+    })
 }
 
-function getAllAverageGrades() {
+function getAllAVGGrades() {
     let rawTds = document.querySelectorAll(
         ".div_noten tbody tr > td:nth-of-type(2)"
     );
@@ -65,42 +91,33 @@ function getAllAverageGrades() {
     }
     averageGradesCollection.shift();
 
-
-
-    if (averageGradesCollection.length > 0) {
-        console.log("averageGradesCollection Array:");
-        console.log(averageGradesCollection);
-        browser.storage.local.set({ theAvgGradeArray: averageGradesCollection }, () => {
-            console.log(
-                "Content Script: Grade array has been saved to browser.storage."
-            );
-        });
-    }else{
-        console.log("Schultility-Extension: No average Grades detected on this Site. Not saving anything");
-    }
-
+    return averageGradesCollection;
 }
 
 function getAllPeriods() {
     let rawTds = document.querySelectorAll(
         ".div_noten tbody tr > td:nth-of-type(1) > b"
     );
-    let TDArray = Array.from(rawTds).map((b_element) => b_element.innerText);
-
-
-    if (TDArray.length > 0) {
-        console.log("Periods Array:");
-        console.log(TDArray);
-        browser.storage.local.set({ periodList: TDArray }, () => {
-            console.log(
-                "Content Script: Grade array has been saved to browser.storage."
-            );
-        });
-    }else{
-        console.log("Schultility-Extension: No average Grades detected on this Site. Not saving anything");
-    }
+    return Array.from(rawTds).map((b_element) => b_element.innerText);
 }
 
-getAllGrades();
-getAllAverageGrades();
-getAllPeriods();
+function removeEmptyEntries(grades, periods){
+    grades.flatMap((grade) => {
+        if(grade !== 0){
+            return grade;
+        }else {
+            return []
+        }
+    })
+    grades.flatMap((grade,index) => {
+        if (grade !== 0){
+            return periods[index]
+        }else {
+            return []
+        }
+    })
+}
+
+getData();
+
+
