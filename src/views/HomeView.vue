@@ -3,7 +3,6 @@
 import GradeManager from '/src/components/GradeManagement.vue';
 import Statistics from '/src/components/gradeStatistics.vue';
 import {onMounted, ref} from "vue";
-import {prepareData} from "@/assets/prepareData";
 
 
 //DataArray contains GradeIndex, Grade itself and the subject name.
@@ -30,11 +29,9 @@ async function retrieveProfileConfigArray() {
 onMounted(async () => {
   //Saving Array from Browser storage, to local variables.
   DataArray.value = await retrieveData();
-  console.log(DataArray.value);
 
   //Assigning local Variables their manipulated Data, which can then be passed to other components for further use.
   ConfigArray.value = await retrieveProfileConfigArray();
-  console.log(ConfigArray.value);
 })
 
 //Assignes emited Values to local variables (ConfigArray, activeProfileID)
@@ -51,7 +48,7 @@ function updateActiveProfileID(num: number) {
     <Statistics
         :PropConfigArray="ConfigArray"
         :PropDataArray="DataArray"
-        :profileID = "activeProfileID"
+        :profileID = "ActiveProfileID"
     ></Statistics>
     <div class="GradeSelectClass">
       <grade-manager

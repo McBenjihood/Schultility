@@ -9,14 +9,14 @@ defineEmits(['toggle-Subject'])
 </script>
 
 <template>
-    <div class="subject">
-      <p>{{subjectName}} :</p>
-      <p>{{grade}}</p>
-      <label class="switch">
-        <input type="checkbox" class="switchOutput" :checked="selected" @click="$emit('toggle-Subject',index)">
-        <span class="sliderround"></span>
-      </label>
-    </div>
+  <div class="subject">
+    <p>{{subjectName}} :</p>
+    <p>{{grade}}</p>
+    <label class="switch">
+      <input type="checkbox" class="switchOutput" :checked="selected" @click="$emit('toggle-Subject',index)">
+      <span class="sliderround"></span>
+    </label>
+  </div>
 </template>
 
 <style scoped>
@@ -25,6 +25,7 @@ defineEmits(['toggle-Subject'])
   display: inline-block;
   width: 52px;
   height: 24px;
+  flex-shrink: 0;
 }
 
 .switch input {
@@ -72,14 +73,27 @@ input:checked+.sliderround:before {
   -ms-transform: translateX(28px);
   transform: translateX(28px);
 }
-.subject{
+
+.subject {
   padding: 10px;
   border: darkslategray 2px solid;
   border-radius: 15px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 0.1em;
-  align-items: center;
   margin-bottom: 0.5em;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  column-gap: 1em;
+  align-items: center;
+}
+.subject p:first-of-type {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.subject p:nth-of-type(2) {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: bold;
 }
 </style>

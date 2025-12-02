@@ -32,19 +32,20 @@ function roundArray(array : number[]){
   })
   return array;
 }
+
 //As the name implies, uses the roundArray function to round the grades and then map them back onto/into the original DataArray.
 function mapRoundedGradesToArray(Array: DataInterface[]){
   let temp = roundArray(Array.map(obj => {return obj.avg}));
-  Array.map((obj, index) => {
-    obj.avg = temp[index];
+  Array.forEach((element, index) => {
+    element.avg = temp[index];
   })
+  return Array;
 }
 
 //Watch methods that detect when reactive props change.
 watch(() => props.PropDataArray, async (newValue) =>{
   DataArray.value = newValue;
-  mapRoundedGradesToArray(DataArray.value);
-  console.log(DataArray.value);
+  DataArray.value = mapRoundedGradesToArray(DataArray.value);
 });
 watch(()=> props.PropConfigArray, async (newValue) =>{
   ConfigArray.value = newValue;
@@ -58,17 +59,23 @@ const getComputableSubjects = computed(() => {
   const ActiveToggles = ConfigArray.value
       .filter(obj => toRaw(obj).ProfileID == ProfileID.value)
       .map(obj => toRaw(obj));
-
-  console.log(toRaw(DataArray.value.filter((obj, index) => {
-    return ActiveToggles.some(toggle => toggle.SubjectIndex == obj.index);
-  })))
-  return toRaw(DataArray.value.filter((obj, index) => {
+  return toRaw(DataArray.value.filter((obj) => {
     return ActiveToggles.some(toggle => toggle.SubjectIndex == obj.index);
   }))
 })
 
+
+
 function shortenDecimal(number: number){
   return Math.floor(number * 1000) / 1000;
+}
+
+function concatArrays(calcArray: number[][]){
+  let concatArray: number[] = [];
+  calcArray.forEach((grades) => {
+    concatArray = concatArray.concat(grades);
+  })
+  return concatArray;
 }
 
 const averageGrade = computed(() => {
@@ -95,14 +102,56 @@ const deficitPoints = computed(() => {
   return shortenDecimal(sum);
 });
 const plusPoints = computed(() => {
-  return 0;
+  const calcArray = getComputableSubjects.value.map((obj) => {return obj.avg});
+  const sumDeficitPoints = calcArray.reduce((accumulator, currentValue) =>{
+    const deficitPoint = 4 - currentValue;
+    if (deficitPoint > 0) {
+      return accumulator + deficitPoint;
+    }else {
+      return accumulator;
+    }
+
+  }, 0);
+
+  const sumPlusPoints = calcArray.reduce((accumulator, currentValue) =>{
+    const deficitPoint =  currentValue - 4;
+    if (deficitPoint > 0) {
+      return accumulator + deficitPoint;
+    }else {
+      return accumulator;
+    }
+
+  }, 0);
+
+  return shortenDecimal(sumPlusPoints - sumDeficitPoints * 2);
 });
 const bestGrade = computed(() => {
-  return "WIP";
+  const calcArray = getComputableSubjects.value.map((obj) => {return obj.grades});
+  let concatArray = concatArrays(calcArray);
+  if (Math.max(...concatArray) > 0){
+    return Math.max(...concatArray);
+  }else return 0;
 });
 const worstGrade = computed(() => {
-  return "WIP";
+  const calcArray = getComputableSubjects.value.map((obj) => {return obj.grades});
+  let concatArray = concatArrays(calcArray);
+  if (Math.min(...concatArray) < 10){
+    return Math.min(...concatArray);
+  }else return 0;
 });
+
+const countInsufficientGrades = computed(() => {
+  const calcArray = getComputableSubjects.value.map((obj) => {return obj.avg});
+  const sum = calcArray.reduce((accumulator, currentValue) =>{
+    if (currentValue < 4) {
+      return accumulator + 1;
+    }else {
+      return accumulator;
+    }
+
+  }, 0);
+  return sum;
+})
 </script>
 
 <template>
@@ -112,16 +161,19 @@ const worstGrade = computed(() => {
     <p>Pluspunkte :</p> <p>{{ plusPoints }}</p>
     <p>Beste Note :</p> <p>{{ bestGrade }}</p>
     <p>Schwächste Note :</p> <p>{{ worstGrade }}</p>
+    <p>Anz. Ungenügend :</p> <p>{{ countInsufficientGrades }}</p>
+
   </div>
 </template>
 
 <style scoped>
 .infoDisplay {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 1em;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5em 2em;
+  align-items: center;
 }
-.infoDisplay p{
+.infoDisplay p {
   margin: 0;
   padding: 0;
   white-space: nowrap;
