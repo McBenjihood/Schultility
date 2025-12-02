@@ -1,9 +1,12 @@
 function getData() {
     const AllGrades = getAllGrades();
     let AllAVGGrades = getAllAVGGrades();
-    const AllPeriods = getAllPeriods();
+    let AllPeriods = getAllPeriods();
 
-    removeEmptyEntries(AllAVGGrades, AllPeriods);
+    AllPeriods = removeEmptySubjects(AllAVGGrades, AllPeriods);
+    console.log(AllPeriods);
+    AllAVGGrades = removeEmptyGrades(AllAVGGrades);
+    console.log(AllAVGGrades);
 
     const DataArray = AllGrades.map((grades, index) => {
         return {index: index,subject: AllPeriods[index], avg: AllAVGGrades[index], grades: grades};
@@ -19,6 +22,8 @@ function getData() {
         console.log("Schultility-Extension: No Grades detected on this Site. Not saving anything");
     }
 }
+
+
 function getAllGrades(){
     // Extracting tbody elements from html, to later group grades together.
     let rawNodes = document.querySelectorAll(
@@ -101,19 +106,23 @@ function getAllPeriods() {
     return Array.from(rawTds).map((b_element) => b_element.innerText);
 }
 
-function removeEmptyEntries(grades, periods){
-    grades.flatMap((grade) => {
-        if(grade !== 0){
-            return grade;
-        }else {
-            return []
+function removeEmptySubjects(grades, periods){
+    return periods.flatMap((period,index) => {
+        if (grades[index] !== 0){
+            return period
+        }else{
+            return [];
         }
     })
-    grades.flatMap((grade,index) => {
-        if (grade !== 0){
-            return periods[index]
-        }else {
-            return []
+}
+
+//Check this Function
+function removeEmptyGrades(grades){
+    return grades.flatMap((grade) => {
+        if(grade !== 0){
+            return grade;
+        }else{
+            return [];
         }
     })
 }
