@@ -1,7 +1,7 @@
 {
   "name": "Schultility",
   "description": "Schulnetz Utility Extension",
-  "version": "2.0",
+  "version": "2.0.1",
   "manifest_version": 3,
   "browser_specific_settings": {
     "gecko": {
