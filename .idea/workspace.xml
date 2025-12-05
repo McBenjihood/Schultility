@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a04c6f87-3750-47b3-9a77-4e0d016fca1d" name="Changes" comment="Testing workflow again.">
+      <change beforePath="$PROJECT_DIR$/css/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/chunk-vendors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/chunk-vendors.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/injected.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/injector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+        <option value="Vue Composition API Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="development" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;McBenjihood&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/McBenjihood/Schultility.git&quot;,
+    &quot;accountId&quot;: &quot;4708fdcd-bb6f-4e34-bfb7-61467830683a&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="33e9GBxiwIad2W0qFWmglBnkE1E" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/benji/WebstormProjects/Schultility/src/assets/img",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.sourceCode",
+    "ts.external.directory.path": "/home/benji/WebstormProjects/Schultility/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "vue.recent.templates": [
+      "Vue Composition API Component"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets/img" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/public/img" />
+      <recent name="$PROJECT_DIR$/html/img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/HomeView" />
+      <recent name="$PROJECT_DIR$/html/img" />
+    </key>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a04c6f87-3750-47b3-9a77-4e0d016fca1d" name="Changes" comment="Updated Workflow" />
+      <created>1759666572513</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759666572513</updated>
+      <workItem from="1759666573560" duration="7810000" />
+      <workItem from="1759699498040" duration="3574000" />
+      <workItem from="1760508531517" duration="5850000" />
+      <workItem from="1760523088420" duration="1020000" />
+      <workItem from="1760603409535" duration="909000" />
+      <workItem from="1760613363328" duration="3520000" />
+      <workItem from="1760609699166" duration="494000" />
+      <workItem from="1760613614214" duration="552000" />
+      <workItem from="1760692257769" duration="97000" />
+      <workItem from="1760965526461" duration="1793000" />
+      <workItem from="1760991618940" duration="782000" />
+      <workItem from="1761218298606" duration="153000" />
+      <workItem from="1761304662513" duration="2275000" />
+      <workItem from="1761592076203" duration="6611000" />
+      <workItem from="1761635488432" duration="6193000" />
+      <workItem from="1761753546360" duration="16000" />
+      <workItem from="1761773085525" duration="27000" />
+      <workItem from="1761826759199" duration="151000" />
+      <workItem from="1762204417953" duration="2610000" />
+      <workItem from="1762247480530" duration="7214000" />
+      <workItem from="1762262331179" duration="1492000" />
+      <workItem from="1762420089753" duration="533000" />
+      <workItem from="1762428031189" duration="32000" />
+      <workItem from="1762518030809" duration="2172000" />
+      <workItem from="1762706865892" duration="4754000" />
+      <workItem from="1763120276547" duration="4575000" />
+      <workItem from="1763394573908" duration="3361000" />
+      <workItem from="1763912413483" duration="14097000" />
+      <workItem from="1764056726840" duration="418000" />
+      <workItem from="1764329602272" duration="332000" />
+      <workItem from="1764329940359" duration="4483000" />
+      <workItem from="1764668058013" duration="3335000" />
+      <workItem from="1764672288199" duration="1797000" />
+      <workItem from="1764681706562" duration="4184000" />
+      <workItem from="1764745852963" duration="5447000" />
+      <workItem from="1764935170397" duration="1844000" />
+      <workItem from="1764937015601" duration="15000" />
+    </task>
+    <task id="LOCAL-00001" summary="Nothing really relevant">
+      <option name="closed" value="true" />
+      <created>1759666749310</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1759666749310</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Nothing really relevant">
+      <option name="closed" value="true" />
+      <created>1759666776991</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759666776991</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Migrating the actual project files from dist directory to html directory">
+      <option name="closed" value="true" />
+      <created>1759667706548</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759667706548</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updating workflow to use html directory from now on and small path change in injector.js">
+      <option name="closed" value="true" />
+      <created>1759667901908</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759667901908</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Updating workflow to use html directory from now on.">
+      <option name="closed" value="true" />
+      <created>1759668076817</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1759668076817</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Still migrating between file paths.">
+      <option name="closed" value="true" />
+      <created>1759668302852</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759668302852</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Last small change for migrating. Also testing workflow with this push.">
+      <option name="closed" value="true" />
+      <created>1759668385135</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1759668385135</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Small change to display correct extension logo.">
+      <option name="closed" value="true" />
+      <created>1759668645819</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1759668645819</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Hopefully will fix the incorrect js script paths">
+      <option name="closed" value="true" />
+      <created>1759668704093</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1759668704093</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Trying to fix vue router error">
+      <option name="closed" value="true" />
+      <created>1759668914831</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1759668914831</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Removed lazy loading, as it isnt compatible with the extension environment.">
+      <option name="closed" value="true" />
+      <created>1759669250343</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1759669250343</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Adding logo">
+      <option name="closed" value="true" />
+      <created>1759669470312</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1759669470312</updated>
+    </task>
+    <task id="LOCAL-00013" summary="small changes.">
+      <option name="closed" value="true" />
+      <created>1759670578660</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1759670578660</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fixing default route not rendering.">
+      <option name="closed" value="true" />
+      <created>1759670764437</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1759670764437</updated>
+    </task>
+    <task id="LOCAL-00015" summary="A lot of changes were made, I am too lazy to list them all and I also do not remember them all in detail. Major changes include progress on gradeStatistics.vue which was able to (for a short time atl) display accurate Statistics about user selected Grades / Subjects. However a restructuring of injected.js and its output data broke the whole thing again, which means I need to fix the statistics again. However this will be an easy and quick fix I hope and from now on working with Data extracted from Schulnetz will be a lot easier, as I now have a single Array with Data about every Subject, instead of like 3 different ones.">
+      <option name="closed" value="true" />
+      <created>1763926380912</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1763926380912</updated>
+    </task>
+    <task id="LOCAL-00016" summary="V 2.0 finally done. Fully reworked all original features with an additional counter for grades under a 4. Restyled the ui to be more readable and userfriendly, list of subject toggles is now more compact. More features will come, this is just the complete port from plain css / html / js to vue.js">
+      <option name="closed" value="true" />
+      <created>1764683030059</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1764683030059</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Small changes and fixes to improve user experience">
+      <option name="closed" value="true" />
+      <created>1764935558492</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1764935558492</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Testing new workflow">
+      <option name="closed" value="true" />
+      <created>1764935959712</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1764935959712</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Oops, forgott another small change.">
+      <option name="closed" value="true" />
+      <created>1764936000595</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936000595</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Testing workflow again.">
+      <option name="closed" value="true" />
+      <created>1764936272838</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936272838</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Testing workflow again.">
+      <option name="closed" value="true" />
+      <created>1764936294215</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936294215</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Testing workflow again.">
+      <option name="closed" value="true" />
+      <created>1764936534187</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936534187</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Testing workflow again.">
+      <option name="closed" value="true" />
+      <created>1764936643372</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936643372</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Testing workflow again.">
+      <option name="closed" value="true" />
+      <created>1764936676588</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936676588</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Testing workflow again.">
+      <option name="closed" value="true" />
+      <created>1764936804499</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936804499</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Testing workflow again.">
+      <option name="closed" value="true" />
+      <created>1764936902340</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1764936902340</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:vue" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Nothing really relevant" />
+    <MESSAGE value="Correct path for injected.js finally set." />
+    <MESSAGE value="Migrating the actual project files from dist directory to html directory" />
+    <MESSAGE value="Updating workflow to use html directory from now on and small path change in injector.js" />
+    <MESSAGE value="Updating workflow to use html directory from now on." />
+    <MESSAGE value="Still migrating between file paths." />
+    <MESSAGE value="Last small change for migrating. Also testing workflow with this push." />
+    <MESSAGE value="Small change to display correct extension logo." />
+    <MESSAGE value="Hopefully will fix the incorrect js script paths" />
+    <MESSAGE value="Trying to fix vue router error" />
+    <MESSAGE value="Removed lazy loading, as it isnt compatible with the extension environment." />
+    <MESSAGE value="Adding logo" />
+    <MESSAGE value="small changes." />
+    <MESSAGE value="Fixing default route not rendering." />
+    <MESSAGE value="A lot of changes were made, I am too lazy to list them all and I also do not remember them all in detail. Major changes include progress on gradeStatistics.vue which was able to (for a short time atl) display accurate Statistics about user selected Grades / Subjects. However a restructuring of injected.js and its output data broke the whole thing again, which means I need to fix the statistics again. However this will be an easy and quick fix I hope and from now on working with Data extracted from Schulnetz will be a lot easier, as I now have a single Array with Data about every Subject, instead of like 3 different ones." />
+    <MESSAGE value="V 2.0 finally done. Fully reworked all original features with an additional counter for grades under a 4. Restyled the ui to be more readable and userfriendly, list of subject toggles is now more compact. More features will come, this is just the complete port from plain css / html / js to vue.js" />
+    <MESSAGE value="Small changes and fixes to improve user experience" />
+    <MESSAGE value="Testing new workflow" />
+    <MESSAGE value="Oops, forgott another small change." />
+    <MESSAGE value="Testing workflow again." />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing workflow again." />
+  </component>
+</project>

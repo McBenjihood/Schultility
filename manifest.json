@@ -17,7 +17,7 @@
     "scripting"
   ],
   "action": {
-    "default_popup": "/html/index.html",
-    "default_icon": "/html/img/icon.png"
+    "default_popup": "/dist/index.html",
+    "default_icon": "/dist/img/icon.png"
   }
 }
