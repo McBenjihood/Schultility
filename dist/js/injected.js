@@ -15,7 +15,7 @@ function getData() {
     if (DataArray.length > 0) {
         console.log("Extracted Data:");
         console.log(DataArray);
-        browser.storage.local.set({ STORAGE_DataArray: DataArray }, () => {
+        chrome.storage.local.set({ STORAGE_DataArray: DataArray }, () => {
             console.log("Content Script: Grade array has been saved to browser.storage.");
         });
     }else{
