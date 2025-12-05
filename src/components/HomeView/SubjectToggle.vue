@@ -1,17 +1,27 @@
 <script setup lang="ts">
-defineProps({
+import {computed} from "vue";
+
+const props = defineProps({
   index: Number,
   grade: Number,
   subjectName: String,
   selected: Boolean
 })
 defineEmits(['toggle-Subject'])
+
+const isInsufficient  = computed(() => {
+  if(props.grade >= 4){
+    return false
+  }else {
+    return true
+  }
+})
 </script>
 
 <template>
   <div class="subject">
     <p>{{subjectName}} :</p>
-    <p>{{grade}}</p>
+    <p :class="{insufficient: isInsufficient}">{{grade}}</p>
     <label class="switch">
       <input type="checkbox" class="switchOutput" :checked="selected" @click="$emit('toggle-Subject',index)">
       <span class="sliderround"></span>
@@ -20,6 +30,9 @@ defineEmits(['toggle-Subject'])
 </template>
 
 <style scoped>
+.insufficient {
+  color: #FFA500;
+}
 .switch {
   position: relative;
   display: inline-block;

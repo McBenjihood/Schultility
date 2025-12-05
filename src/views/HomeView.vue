@@ -1,7 +1,7 @@
 <script setup lang="ts">
 //Imports
-import GradeManager from '/src/components/GradeManagement.vue';
-import Statistics from '/src/components/gradeStatistics.vue';
+import GradeManager from '@/components/HomeView/GradeManagement.vue';
+import Statistics from '@/components/HomeView/gradeStatistics.vue';
 import {onMounted, ref} from "vue";
 
 

@@ -167,6 +167,9 @@ const countInsufficientGrades = computed(() => {
 </template>
 
 <style scoped>
+.insufficient {
+  color: #FFA500;
+}
 .infoDisplay {
   display: grid;
   grid-template-columns: max-content 1fr;

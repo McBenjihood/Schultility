@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SubjectToggle from "@/components/SubjectToggle.vue";
+import SubjectToggle from "@/components/HomeView/SubjectToggle.vue";
 import {ref, toRaw, watch} from "vue";
 //Array containing all existing Profiles.
 const profilesArray = ref([
@@ -149,7 +149,7 @@ hr{
   transition-duration: 0.4s;
 }
 .selectButton:hover {
-  background-color: #46627f; /* Lighter Blue Gray on hover */
+  background-color: #46627f;
 }
 
 .active{

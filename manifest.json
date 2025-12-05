@@ -1,8 +1,16 @@
 {
   "name": "Schultility",
   "description": "Schulnetz Utility Extension",
-  "version": "1.1",
+  "version": "2.0",
   "manifest_version": 3,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "benjaminmikagerresheim@gmail.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
   "permissions": [
     "storage",
     "activeTab",
