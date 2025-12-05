@@ -34,14 +34,16 @@ jobs:
         run: |
           npm ci
           npm run build
-          
-      - name: Move new build to root directory
+
+      - name: Move new build to dist folder
         run: |
-          mv ./.dev-build/dist/* .
-          
+          # Remove existing dist folder (if any) in the main branch checkout
+          rm -rf ./dist
+          mv ./.dev-build/dist ./dist
+
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "build(vue): Update built files in root from development build"
+          commit_message: "build(vue): Update dist folder from development build" # Updated commit message
           branch: main
-          file_pattern: '**'
+          file_pattern: dist/* 
