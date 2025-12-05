@@ -5,9 +5,11 @@
   <div class="home">
     <div class="titleElement">
       <h1>Schultility</h1>
+      <!--
       <router-link to="/account/login" class="btn">
         <img src="/src/assets/img/account_circle.svg">
       </router-link>
+      -->
     </div>
     <nav class="menu">
       <router-link to="/" class="routerLinkClass">Home</router-link>
