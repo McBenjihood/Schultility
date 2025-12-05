@@ -23,7 +23,6 @@ function getData() {
     }
 }
 
-
 function getAllGrades(){
     // Extracting tbody elements from html, to later group grades together.
     let rawNodes = document.querySelectorAll(
