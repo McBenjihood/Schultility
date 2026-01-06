@@ -1,11 +1,15 @@
 <script setup lang="ts">
 
+import {ref} from "vue";
+
+let email = ref("");
 </script>
 
 <template>
   <div class="loginDiv">
-    <input type="text" class="inputClass">
-    <input type="password" class="inputClass"/>
+    <h3>LOGIN</h3>
+    <input type="text" class="inputClass" placeholder="Enter E-mail address" autocomplete="off" v-model="email">
+    <!-- <input type="password" class="inputClass"/> -->
   </div>
 
   <div class="registerMenu">
@@ -16,16 +20,34 @@
 </template>
 
 <style scoped>
+.loginDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.loginDiv h3{
+  padding: 0;
+  margin: 0;
+}
+
 .inputClass {
-  padding: 10px;
+  padding: 5px;
+  width: 200px;
   border: 2px solid darkslategray;
   border-radius: 8px;
   outline: none;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 .inputClass:focus {
   box-shadow: 0 0 5px darkslategray;
+}
+
+.registerMenu, .registerMenu p, .registerMenu .routerLinkClass {
+  margin: 0;
+  padding: 0;
 }
 
 .registerMenu {
@@ -33,11 +55,9 @@
   align-items: baseline;
   justify-content: center;
   gap: 0.3em;
+  margin-top: 1em;
 }
-.registerMenu, .registerMenu p, .registerMenu .routerLinkClass {
-  margin: 0;
-  padding: 0;
-}
+
 
 .routerLinkClass {
   color: white;
