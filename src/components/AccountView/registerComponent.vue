@@ -6,7 +6,8 @@ import CredInput from "@/components/AccountView/CredInput.vue";
 
   <div class="registerDiv">
     <cred-input
-        :title="'Register'"
+        :title="'Registrieren'"
+        :endpoint="'register'"
     ></cred-input>
   </div>
 
@@ -17,18 +18,6 @@ import CredInput from "@/components/AccountView/CredInput.vue";
 
 
 <style scoped>
-.loginDiv {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-.loginDiv h3{
-  padding: 0;
-  margin: 0;
-}
-
 .registerMenu, .registerMenu p, .registerMenu .routerLinkClass {
   margin: 0;
   padding: 0;

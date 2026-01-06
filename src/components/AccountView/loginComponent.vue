@@ -6,6 +6,7 @@ import CredInput from "@/components/AccountView/CredInput.vue";
   <div class="loginDiv">
     <cred-input
     :title="'Login'"
+    :endpoint="'login'"
     ></cred-input>
   </div>
 
@@ -17,11 +18,6 @@ import CredInput from "@/components/AccountView/CredInput.vue";
 </template>
 
 <style scoped>
-
-.loginDiv h3{
-  padding: 0;
-  margin: 0;
-}
 
 .registerMenu, .registerMenu p, .registerMenu .routerLinkClass {
   margin: 0;
@@ -35,7 +31,6 @@ import CredInput from "@/components/AccountView/CredInput.vue";
   gap: 0.3em;
   margin-top: 1em;
 }
-
 
 .routerLinkClass {
   color: white;

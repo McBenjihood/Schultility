@@ -90,8 +90,6 @@ function emitID(){
   emit("emitID", selectedProfileID.value); // -> Emit the activeProfileID so the stats can be calculated correctly with only selected grades counting.
 }
 
-
-
 function getSelected(index: number){
  const checkIndex = checkIndexValue(ProfileConfigArray.value, index);
  if(checkIndex != -1){
