@@ -1,12 +1,13 @@
 <script setup lang="ts">
-
+import CredInput from "@/components/AccountView/CredInput.vue";
 </script>
 
 <template>
-  <div class="loginDiv">
-    <h3>REGISTRIERUNG</h3>
-    <input type="text" class="inputClass" placeholder="Enter E-mail address" autocomplete="off">
-    <!-- <input type="password" class="inputClass"/> -->
+
+  <div class="registerDiv">
+    <cred-input
+        :title="'Register'"
+    ></cred-input>
   </div>
 
   <div class="registerMenu">
@@ -26,19 +27,6 @@
 .loginDiv h3{
   padding: 0;
   margin: 0;
-}
-
-.inputClass {
-  padding: 5px;
-  width: 200px;
-  border: 2px solid darkslategray;
-  border-radius: 8px;
-  outline: none;
-  font-size: 0.8rem;
-}
-
-.inputClass:focus {
-  box-shadow: 0 0 5px darkslategray;
 }
 
 .registerMenu, .registerMenu p, .registerMenu .routerLinkClass {

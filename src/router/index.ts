@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import AccountView from "@/views/AccountView.vue";
 import LoginComponent from "@/components/AccountView/loginComponent.vue";
-import RegisterComponent from "@/components/AccountView/registerComponentnpm install vue-router@4.5.0.vue";
+import RegisterComponent from "@/components/AccountView/registerComponent.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {

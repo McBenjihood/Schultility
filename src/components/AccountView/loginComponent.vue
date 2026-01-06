@@ -1,15 +1,12 @@
 <script setup lang="ts">
-
-import {ref} from "vue";
-
-let email = ref("");
+import CredInput from "@/components/AccountView/CredInput.vue";
 </script>
 
 <template>
   <div class="loginDiv">
-    <h3>LOGIN</h3>
-    <input type="text" class="inputClass" placeholder="Enter E-mail address" autocomplete="off" v-model="email">
-    <!-- <input type="password" class="inputClass"/> -->
+    <cred-input
+    :title="'Login'"
+    ></cred-input>
   </div>
 
   <div class="registerMenu">
@@ -20,29 +17,10 @@ let email = ref("");
 </template>
 
 <style scoped>
-.loginDiv {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
 
 .loginDiv h3{
   padding: 0;
   margin: 0;
-}
-
-.inputClass {
-  padding: 5px;
-  width: 200px;
-  border: 2px solid darkslategray;
-  border-radius: 8px;
-  outline: none;
-  font-size: 0.8rem;
-}
-
-.inputClass:focus {
-  box-shadow: 0 0 5px darkslategray;
 }
 
 .registerMenu, .registerMenu p, .registerMenu .routerLinkClass {
