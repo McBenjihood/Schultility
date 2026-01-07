@@ -24,18 +24,20 @@ const url = "http://localhost:8080/api/user/";
 async function login(username: string, password: string) {
   try {
     let response : loginResponse = await fetchLogin(username, password);
+    errorMessage.value = "";
 
-    console.log(response.accessToken);
-    console.log(response.tokenType);
-    console.log(response.expiresIn);
-    console.log(response.username);
+    chrome.storage.local.set({ accesToken_BROWSER_STORAGE: response.accessToken }, () => {
+      console.log(response.accessToken)
+      console.log("JWT has been saved.");
+    });
+
   }catch(error) {
     errorMessage.value = (error as Error).message;
   }
 }
 
 async function fetchLogin(username: string, password: string) {
-  try {
+
     const response = await fetch(url + props.endpoint, {
       method: "POST",
       headers: {
@@ -49,13 +51,9 @@ async function fetchLogin(username: string, password: string) {
     const resultJson = await response.json();
 
     if (!response.ok) {
-      throw new Error(resultJson.error)
+      throw new Error(resultJson.error);
     }
-
     return resultJson;
-  }catch(error) {
-    throw error;
-  }
 }
 
 </script>
