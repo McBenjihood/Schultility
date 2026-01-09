@@ -31,6 +31,11 @@ async function login(username: string, password: string) {
       console.log("JWT has been saved.");
     });
 
+    chrome.storage.local.set({ tokenType: response.tokenType }, () => {
+      console.log(response.tokenType)
+      console.log("Token type has been saved.");
+    })
+
   }catch(error) {
     errorMessage.value = (error as Error).message;
   }

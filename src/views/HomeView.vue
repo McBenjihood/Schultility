@@ -12,6 +12,8 @@ const ConfigArray = ref<object[]>([]);
 //activeProfileID contains the Number corresponding to the current active Profile.
 let ActiveProfileID = ref<number>(0);
 
+const url = "localhost:8080/api/user"
+
 //Functions retrieving Data from Browser storage.
 async function retrieveData() {
   const result = await chrome.storage.local.get(["STORAGE_DataArray"]);
@@ -24,9 +26,31 @@ async function retrieveProfileConfigArray() {
   return result.ProfileConfigArray_BROWSER_STORAGE || [];
 }
 
+async function checkAuth(){
+  const token = await chrome.storage.local.get(["accesToken_BROWSER_STORAGE"]);
+  console.log(token.accessToken_BROWSER_STORAGE);
+  let response;
+  try{
+    response = fetch(url + "/authenticate",{
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token.accessToken}`
+      }
+    })
+  }catch (error){
+    console.log("Could not check user's authentication");
+  }
+  finally {
+    console.log("Auth Check Complete");
+  }
+  return response;
+}
+
 
 //Retrieving Data from Browser Storage and getting ToggleConfigs from Storage aswell.
 onMounted(async () => {
+  await checkAuth();
   //Saving Array from Browser storage, to local variables.
   DataArray.value = await retrieveData();
 
