@@ -1,13 +1,25 @@
 <script setup lang="ts">
+import {checkAuth} from "./assets/js/API";
+import router from "@/router";
+
+async function handleNav(){
+  if(await checkAuth()){
+    console.log("/account/manage")
+    await router.push("/account/manage");
+  }else {
+    console.log("/account/manage");
+    await router.push("/account/login");
+  }
+}
 </script>
 
 <template>
   <div class="home">
     <div class="titleElement">
       <h1>Schultility</h1>
-      <router-link to="/account/login" class="btn">
+      <button to="/account/login" @click="handleNav" class="btn">
         <img src="/src/assets/img/account_circle.svg">
-      </router-link>
+      </button>
     </div>
     <nav class="menu">
       <router-link to="/" class="routerLinkClass">Home</router-link>
@@ -39,11 +51,17 @@
 }
 
 .btn {
+  background-color: transparent;
+  border: none;
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
+}
+
+.btn:hover{
+  cursor:pointer;
 }
 
 .home {

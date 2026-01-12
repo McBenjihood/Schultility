@@ -2,6 +2,7 @@
 //Imports
 import GradeManager from '@/components/HomeView/GradeManagement.vue';
 import Statistics from '@/components/HomeView/gradeStatistics.vue';
+import {checkAuth, fetchConfigData, fetchGradeData} from "@/assets/js/API";
 import {onMounted, ref} from "vue";
 
 
@@ -12,7 +13,7 @@ const ConfigArray = ref<object[]>([]);
 //activeProfileID contains the Number corresponding to the current active Profile.
 let ActiveProfileID = ref<number>(0);
 
-const url = "localhost:8080/api/user"
+const isAuthenticated = ref<boolean>(false);
 
 //Functions retrieving Data from Browser storage.
 async function retrieveData() {
@@ -26,36 +27,22 @@ async function retrieveProfileConfigArray() {
   return result.ProfileConfigArray_BROWSER_STORAGE || [];
 }
 
-async function checkAuth(){
-  const token = await chrome.storage.local.get(["accesToken_BROWSER_STORAGE"]);
-  console.log(token.accessToken_BROWSER_STORAGE);
-  let response;
-  try{
-    response = fetch(url + "/authenticate",{
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token.accessToken}`
-      }
-    })
-  }catch (error){
-    console.log("Could not check user's authentication");
-  }
-  finally {
-    console.log("Auth Check Complete");
-  }
-  return response;
-}
-
-
 //Retrieving Data from Browser Storage and getting ToggleConfigs from Storage aswell.
 onMounted(async () => {
-  await checkAuth();
-  //Saving Array from Browser storage, to local variables.
-  DataArray.value = await retrieveData();
-
-  //Assigning local Variables their manipulated Data, which can then be passed to other components for further use.
-  ConfigArray.value = await retrieveProfileConfigArray();
+  isAuthenticated.value = await checkAuth();
+  if(isAuthenticated.value) {
+    DataArray.value = await fetchGradeData()
+    console.log(DataArray.value);
+    ConfigArray.value = await fetchConfigData();
+    console.log(ConfigArray.value);
+  }else{
+    //Saving Array from Browser storage, to local variables.
+    DataArray.value = await retrieveData();
+    console.log(DataArray.value);
+    //Assigning local Variables their manipulated Data, which can then be passed to other components for further use.
+    ConfigArray.value = await retrieveProfileConfigArray();
+    console.log(ConfigArray.value);
+  }
 })
 
 //Assignes emited Values to local variables (ConfigArray, activeProfileID)

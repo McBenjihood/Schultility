@@ -4,6 +4,8 @@ import AboutView from '../views/AboutView.vue'
 import AccountView from "@/views/AccountView.vue";
 import LoginComponent from "@/components/AccountView/loginComponent.vue";
 import RegisterComponent from "@/components/AccountView/registerComponent.vue";
+import {checkAuth} from "@/assets/js/API";
+import AccountManagment from "@/components/AccountView/AccountManagment.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -28,7 +30,12 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: 'register',
                 component: RegisterComponent
-            }]
+            },
+            {
+                path: 'manage',
+                component: AccountManagment
+            }
+        ]
     }
 
 ]
@@ -38,4 +45,4 @@ const router = createRouter({
     routes
 })
 
-export default router
+export default router;

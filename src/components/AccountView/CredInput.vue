@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {ref} from "vue";
+import router from "@/router";
 
 const props = defineProps({
   title : String,
@@ -26,18 +27,14 @@ async function login(username: string, password: string) {
     let response : loginResponse = await fetchLogin(username, password);
     errorMessage.value = "";
 
-    chrome.storage.local.set({ accesToken_BROWSER_STORAGE: response.accessToken }, () => {
-      console.log(response.accessToken)
-      console.log("JWT has been saved.");
-    });
-
-    chrome.storage.local.set({ tokenType: response.tokenType }, () => {
-      console.log(response.tokenType)
-      console.log("Token type has been saved.");
-    })
+    await chrome.storage.local.set({ accessToken: response.accessToken });
+    await chrome.storage.local.set({ tokenType: response.tokenType })
 
   }catch(error) {
     errorMessage.value = (error as Error).message;
+  }
+  finally {
+    router.push("/")
   }
 }
 
