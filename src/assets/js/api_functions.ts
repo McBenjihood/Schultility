@@ -28,9 +28,8 @@ export async function fetchGradeData(){
                 'Authorization': `Bearer ${obj.accessToken}`
             }
         })
-        console.log("Tried to fetch grade data");
         const returnValue = await response.json();
-        return returnValue;
+        return returnValue.gradeData;
     }catch (error){
         console.log(error);
     }
@@ -47,7 +46,6 @@ export async function fetchConfigData(){
                 'Authorization': `Bearer ${obj.accessToken}`
             }
         })
-        console.log("Tried to fetch config data");
         const returnValue = await response.json();
         return returnValue.configData;
     }catch (error){

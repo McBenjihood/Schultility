@@ -2,8 +2,9 @@
 //Imports
 import GradeManager from '@/components/HomeView/GradeManagement.vue';
 import Statistics from '@/components/HomeView/gradeStatistics.vue';
-import {checkAuth, fetchConfigData, fetchGradeData} from "@/assets/js/API";
-import {onMounted, ref} from "vue";
+import {fetchConfigData, fetchGradeData} from "@/assets/js/api_functions";
+import {onMounted, ref, toRaw} from "vue";
+import {authStore} from "@/assets/js/auth";
 
 
 //DataArray contains GradeIndex, Grade itself and the subject name.
@@ -13,7 +14,13 @@ const ConfigArray = ref<object[]>([]);
 //activeProfileID contains the Number corresponding to the current active Profile.
 let ActiveProfileID = ref<number>(0);
 
-const isAuthenticated = ref<boolean>(false);
+//Interface
+interface DataInterface {
+  index: number,
+  subject: string,
+  avg: number,
+  grades: number[]
+}
 
 //Functions retrieving Data from Browser storage.
 async function retrieveData() {
@@ -29,12 +36,22 @@ async function retrieveProfileConfigArray() {
 
 //Retrieving Data from Browser Storage and getting ToggleConfigs from Storage aswell.
 onMounted(async () => {
-  isAuthenticated.value = await checkAuth();
-  if(isAuthenticated.value) {
-    DataArray.value = await fetchGradeData()
-    console.log(DataArray.value);
-    ConfigArray.value = await fetchConfigData();
-    console.log(ConfigArray.value);
+  await authStore.initialize();
+  if(authStore.isAuthenticated) {
+    //Fetching Grade / Configdata from Backend
+    const localDataArray = await retrieveData();
+    const localConfigData = await retrieveProfileConfigArray();
+
+    await fetchGradeData().then((array) => {
+      DataArray.value = toRaw(array);
+      console.log(array);
+    })
+    await fetchConfigData().then((array) => {
+      ConfigArray.value = toRaw(array);
+      console.log("Fetched ConfigData");
+    })
+
+
   }else{
     //Saving Array from Browser storage, to local variables.
     DataArray.value = await retrieveData();

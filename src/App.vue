@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import {checkAuth} from "./assets/js/API";
+import {checkAuth} from "./assets/js/api_functions";
 import router from "@/router";
+import {authStore} from "@/assets/js/auth";
+import SettingsWheel from "@/assets/img/settings_wheel.svg";
+import AccountCircle from "@/assets/img/account_circle.svg";
 
 async function handleNav(){
-  if(await checkAuth()){
-    console.log("/account/manage")
+  if(authStore.isAuthenticated){
     await router.push("/account/manage");
   }else {
-    console.log("/account/manage");
     await router.push("/account/login");
   }
 }
+
 </script>
 
 <template>
@@ -18,7 +20,7 @@ async function handleNav(){
     <div class="titleElement">
       <h1>Schultility</h1>
       <button to="/account/login" @click="handleNav" class="btn">
-        <img src="/src/assets/img/account_circle.svg">
+        <img :src=" authStore.isAuthenticated ? SettingsWheel : AccountCircle" />
       </button>
     </div>
     <nav class="menu">

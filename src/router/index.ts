@@ -4,7 +4,7 @@ import AboutView from '../views/AboutView.vue'
 import AccountView from "@/views/AccountView.vue";
 import LoginComponent from "@/components/AccountView/loginComponent.vue";
 import RegisterComponent from "@/components/AccountView/registerComponent.vue";
-import {checkAuth} from "@/assets/js/API";
+import {checkAuth} from "@/assets/js/api_functions";
 import AccountManagment from "@/components/AccountView/AccountManagment.vue";
 
 const routes: Array<RouteRecordRaw> = [

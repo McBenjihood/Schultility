@@ -13,7 +13,7 @@ async function logout() {
 
 <template>
   <h1>Account-Management </h1>
-  <button @click="logout()" class="btn">Logout
+  <button @click="logout()" class="btn">
     Log Out
   </button>
 </template>
