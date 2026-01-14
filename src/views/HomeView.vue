@@ -2,7 +2,7 @@
 //Imports
 import GradeManager from '@/components/HomeView/GradeManagement.vue';
 import Statistics from '@/components/HomeView/gradeStatistics.vue';
-import {fetchConfigData, fetchGradeData} from "@/assets/js/api_functions";
+import {fetchConfigData, fetchGradeData, updateConfigData, updateGradeData} from "@/assets/js/api_functions";
 import {onMounted, ref, toRaw} from "vue";
 import {authStore} from "@/assets/js/auth";
 
@@ -20,6 +20,10 @@ interface DataInterface {
   subject: string,
   avg: number,
   grades: number[]
+}
+interface ConfigInterface {
+  ProfileID: number,
+  SubjectIndex: number
 }
 
 //Functions retrieving Data from Browser storage.
@@ -43,15 +47,25 @@ onMounted(async () => {
     const localConfigData = await retrieveProfileConfigArray();
 
     await fetchGradeData().then((array) => {
-      DataArray.value = toRaw(array);
-      console.log(array);
+      if(array == null){
+        DataArray.value = localDataArray;
+      }else {
+        DataArray.value = toRaw(array);
+        console.log(array);
+      }
     })
     await fetchConfigData().then((array) => {
+      if(array == null) {
+        ConfigArray.value = localConfigData;
+      }else {
+        ConfigArray.value = toRaw(array);
+        console.log(array);
+      }
       ConfigArray.value = toRaw(array);
       console.log("Fetched ConfigData");
     })
 
-
+    await updateGradeData(localDataArray);
   }else{
     //Saving Array from Browser storage, to local variables.
     DataArray.value = await retrieveData();

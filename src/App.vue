@@ -4,6 +4,7 @@ import router from "@/router";
 import {authStore} from "@/assets/js/auth";
 import SettingsWheel from "@/assets/img/settings_wheel.svg";
 import AccountCircle from "@/assets/img/account_circle.svg";
+import RefreshIcon from "@/assets/img/refresh.svg";
 
 async function handleNav(){
   if(authStore.isAuthenticated){
@@ -13,23 +14,32 @@ async function handleNav(){
   }
 }
 
+function refreshPage(){
+  location.reload();
+}
+
 </script>
 
 <template>
-  <div class="home">
-    <div class="titleElement">
-      <h1>Schultility</h1>
-      <button to="/account/login" @click="handleNav" class="btn">
-        <img :src=" authStore.isAuthenticated ? SettingsWheel : AccountCircle" />
-      </button>
-    </div>
-    <nav class="menu">
-      <router-link to="/" class="routerLinkClass">Home</router-link>
-      <p>|</p>
-      <router-link to="/about" class="routerLinkClass">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+<div class="home">
+<div class="titleElement">
+  <h1>Schultility</h1>
+  <!-- Added 'left' class here -->
+  <button @click="refreshPage" class="btn left">
+    <img :src=RefreshIcon>
+  </button>
+  <!-- Added 'right' class here -->
+  <button @click="handleNav" class="btn right">
+    <img :src=" authStore.isAuthenticated ? SettingsWheel : AccountCircle" />
+  </button>
+</div>
+<nav class="menu">
+  <router-link to="/" class="routerLinkClass">Home</router-link>
+  <p>|</p>
+  <router-link to="/about" class="routerLinkClass">About</router-link>
+</nav>
+<router-view/>
+</div>
 </template>
 
 <style scoped>
@@ -56,10 +66,18 @@ async function handleNav(){
   background-color: transparent;
   border: none;
   position: absolute;
-  right: 0;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
+}
+
+/* New specific positions */
+.btn.left {
+  left: 0;
+}
+
+.btn.right {
+  right: 0;
 }
 
 .btn:hover{

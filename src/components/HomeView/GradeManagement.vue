@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import SubjectToggle from "@/components/HomeView/SubjectToggle.vue";
 import {ref, toRaw, watch} from "vue";
+import {authStore} from "@/assets/js/auth";
+import {updateConfigData} from "@/assets/js/api_functions";
 //Array containing all existing Profiles.
 const profilesArray = ref([
   {
@@ -61,7 +63,7 @@ function changeProfile(profileID: number){
 }
 
 //Function to toggle Subject on or off when pressing the Switch. Further Detail on functionality below.
-function toggleSubject(index: number){
+async function toggleSubject(index: number){
   const checkIndex = checkIndexValue(ProfileConfigArray.value, index);
   if(checkIndex != -1){
     //Entry already exists and will be toggled now / deleted from this array
@@ -76,6 +78,7 @@ function toggleSubject(index: number){
 
   //Uses imported toRaw Function to save the original data of a Vue created Proxy-Object-thingy.
   const rawConfigArray = toRaw(ProfileConfigArray.value);
+  await updateConfigData(rawConfigArray);
   chrome.storage.local.set({ ProfileConfigArray_BROWSER_STORAGE: rawConfigArray }, () => {
     emitToggles();
   });
