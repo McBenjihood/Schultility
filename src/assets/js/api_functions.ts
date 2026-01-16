@@ -86,7 +86,7 @@ export async function updateGradeData(gradeData : DataInterface){
     }
 }
 
-export async function updateConfigData(configData : Object[]){
+export async function updateConfigData(configData : object[]){
     const obj = await chrome.storage.local.get(["accessToken"]);
     try{
         const response = await fetch(url + "/updateconfigdata", {

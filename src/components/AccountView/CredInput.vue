@@ -3,6 +3,7 @@
 import {ref} from "vue";
 import router from "@/router";
 
+
 const props = defineProps({
   title : String,
   endpoint: String
@@ -18,24 +19,34 @@ interface loginResponse {
 let username = ref("");
 let pwd = ref("");
 
-let errorMessage = ref("");
-
+let responseMessage = ref("");
 const url = "http://localhost:8080/api/user/";
+
+let successfulRegister = ref(false);
 
 async function login(username: string, password: string) {
   try {
-    let response : loginResponse = await fetchLogin(username, password);
-    errorMessage.value = "";
+    const response = await fetchLogin(username, password);
+    responseMessage.value = "";
 
-    await chrome.storage.local.set({ accessToken: response.accessToken });
-    await chrome.storage.local.set({ tokenType: response.tokenType })
 
+    if(response.message){
+      successfulRegister.value = true;
+      responseMessage.value = response.message;
+    }else if (response.accessToken){
+      await chrome.storage.local.set({ accessToken: response.accessToken });
+      await chrome.storage.local.set({ tokenType: response.tokenType })
+
+      await router.push("/");
+    }
   }catch(error) {
-    errorMessage.value = (error as Error).message;
+    responseMessage.value = (error as Error).message;
   }
-  finally {
-    router.push("/")
-  }
+
+}
+
+async function navLogin (){
+  await router.push("/account/login");
 }
 
 async function fetchLogin(username: string, password: string) {
@@ -65,18 +76,14 @@ async function fetchLogin(username: string, password: string) {
     <h3>{{props.title}}</h3>
     <input type="email" class="inputClass" placeholder="E-Mail eingeben" autocomplete="off" v-model="username">
     <input type="password" class="inputClass" placeholder="Password eingeben" autocomplete="off" v-model="pwd">
-    <p :class="{inactive : errorMessage.length == 0}" class="">{{errorMessage}}</p>
-    <button class="registerButton" type="submit" @click="login(username, pwd)">{{props.title}}</button>
+    <p :class="{inactive : responseMessage.length == 0}" class="">{{responseMessage}}</p>
+    <button class="registerButton" :class="{'inactive': successfulRegister}" type="submit" @click="login(username, pwd)">{{props.title}}</button>
+    <button class="registerButton" :class="{'inactive': !successfulRegister}" type="submit" @click="navLogin">Continue</button>
   </div>
 </template>
 
 
 <style scoped>
-.inactive{
-  display: none;
-}
-
-
 .inputClass {
   padding: 8px 12px;
   width: 200px;
@@ -131,5 +138,9 @@ async function fetchLogin(username: string, password: string) {
 .registerButton:hover {
   background-color: #46627f;
   border-color: #46627f;
+}
+
+.inactive{
+  display: none;
 }
 </style>
