@@ -1,27 +1,85 @@
 <script setup lang="ts">
-import {computed} from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   index: Number,
-  grade: Number,
+  avg: Number,
   subjectName: String,
-  selected: Boolean
+  selected: Boolean,
+  grades: Array
 })
 defineEmits(['toggle-Subject'])
 
+const isExpanded = ref(false);
+
 const isInsufficient  = computed(() => {
-  if(props.grade >= 4){
+  if(props.avg >= 4){
     return false
   }else {
     return true
   }
 })
+
+
+const options = ref({
+  chart: {
+    id: 'grade-chart',
+    toolbar: {
+      show: false
+    }
+  },
+  xaxis: {
+    labels: {
+      show: false
+    },
+    axisBorder: {
+      show: false
+    },
+    axisTicks: {
+      show: false
+    }
+  },
+  yaxis: {
+    min: 1,
+    max: 6
+  },
+  markers: {
+    size: 5,
+    strokeWidth: 2,
+    hover: {
+      size: 5
+    }
+  },
+  tooltip: {
+    x: {
+      formatter: function(val) {
+        return `${val}. Prüfung`;
+      }
+    }
+  }
+});
+
+const series = ref([{
+  name: 'Note',
+  data: props.grades
+}]);
 </script>
 
 <template>
   <div class="subject">
+    <div class="expand-toggle" @click="isExpanded = !isExpanded">
+      <img
+          src="@/assets/img/expand-content.svg"
+          alt="expand-content"
+          class="expand-icon"
+          :class="{ 'rotated': isExpanded }"
+      >
+    </div>
+    <div class="chart-wrapper" :class="{ 'expanded': isExpanded }">
+      <apexchart width="100%" type="line" :options="options" :series="series"></apexchart>
+    </div>
     <p>{{subjectName}} :</p>
-    <p :class="{insufficient: isInsufficient}">{{grade}}</p>
+    <p :class="{insufficient: isInsufficient}">{{avg}}</p>
     <label class="switch">
       <input type="checkbox" class="switchOutput" :checked="selected" @click="$emit('toggle-Subject',index)">
       <span class="sliderround"></span>
@@ -30,9 +88,25 @@ const isInsufficient  = computed(() => {
 </template>
 
 <style scoped>
+.expand-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.expand-icon {
+  transition: transform 0.3s ease;
+}
+
+.expand-icon.rotated {
+  transform: rotate(90deg);
+}
+
 .insufficient {
   color: #FFA500;
 }
+
 .switch {
   position: relative;
   display: inline-block;
@@ -93,10 +167,11 @@ input:checked+.sliderround:before {
   border-radius: 15px;
   margin-bottom: 0.5em;
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto;
   column-gap: 1em;
   align-items: center;
 }
+
 .subject p:first-of-type {
   margin: 0;
   white-space: nowrap;
@@ -104,9 +179,21 @@ input:checked+.sliderround:before {
   text-overflow: ellipsis;
   min-width: 0;
 }
+
 .subject p:nth-of-type(2) {
   margin: 0;
   white-space: nowrap;
   font-weight: bold;
+}
+
+.chart-wrapper {
+  display: none;
+}
+
+.chart-wrapper.expanded {
+  display: block;
+  grid-column: 1 / -1;
+  order: 1;
+  width: 100%;
 }
 </style>

@@ -5,9 +5,6 @@
   <div class="home">
     <div class="titleElement">
       <h1>Schultility</h1>
-      <router-link to="/account/login" class="btn">
-        <img src="/src/assets/img/account_circle.svg">
-      </router-link>
     </div>
     <nav class="menu">
       <router-link to="/" class="routerLinkClass">Home</router-link>
@@ -28,22 +25,9 @@
   margin: 0;
 }
 
-.titleElement img{
-  height: 2.5em;
-  display: block;
-}
-
 .titleElement h1 {
   padding: 0;
   margin: 0;
-}
-
-.btn {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
 }
 
 .home {

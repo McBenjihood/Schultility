@@ -118,9 +118,10 @@ function getSelected(index: number){
       :profileID="selectedProfileID"
       :key=item.index
       :index = item.index
-      :grade = item.avg
+      :avg = item.avg
       :selected = getSelected(item.index)
       :subject-name = item.subject
+      :grades = item.grades
       @toggle-Subject="toggleSubject"
   ></subject-toggle>
 </template>
