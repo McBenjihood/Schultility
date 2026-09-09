@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -16,217 +15,211 @@
             justify-content: center;
         }
 
-```
-    .div_noten {
-        width: 100%;
-        max-width: 800px;
-        background: #fff;
-        border-radius: 4px;
-        border: 1px solid #ddd;
-        box-shadow: none;
-        overflow: hidden;
-        padding-bottom: 20px;
-    }
+        .div_noten {
+            width: 100%;
+            max-width: 800px;
+            background: #fff;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: none;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
 
-    .div_noten > table {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
+        .div_noten > table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
 
-    .subject-row {
-        border-bottom: 1px solid #ddd;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-    }
+        .subject-row {
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
-    .subject-row:hover {
-        background-color: #e9e9e9;
-    }
+        .subject-row:hover {
+            background-color: #e9e9e9;
+        }
 
-    .subject-row td {
-        padding: 15px 20px;
-        font-size: 1rem;
-    }
+        .subject-row td {
+            padding: 15px 20px;
+            font-size: 1rem;
+        }
 
-    .subject-row b {
-        font-weight: bold;
-        color: #333;
-        font-size: 1rem;
-        vertical-align: middle;
-    }
+        .subject-row b {
+            font-weight: bold;
+            color: #333;
+            font-size: 1rem;
+            vertical-align: middle;
+        }
 
-    .grade-badge {
-        background-color: #007bff;
-        color: white;
-        padding: 4px 10px;
-        border-radius: 4px;
-        font-weight: bold;
-        font-size: 0.9rem;
-        box-shadow: none;
-        float: right;
-    }
+        .grade-badge {
+            background-color: #007bff;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: none;
+            float: right;
+        }
 
-    .toggle-icon {
-        display: inline-block;
-        margin-right: 10px;
-        color: #777;
-        transition: transform 0.3s ease;
-        font-size: 0.8rem;
-        vertical-align: middle;
-    }
+        .toggle-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: #777;
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+            vertical-align: middle;
+        }
 
-    .subject-row.active .toggle-icon {
-        transform: rotate(90deg);
-        color: #007bff;
-    }
+        .subject-row.active .toggle-icon {
+            transform: rotate(90deg);
+            color: #007bff;
+        }
 
-    .details-row {
-        display: none;
-        background-color: #fafafa;
-    }
+        .details-row {
+            display: none;
+            background-color: #fafafa;
+        }
 
-    .details-row.visible {
-        display: table-row;
-    }
+        .details-row.visible {
+            display: table-row;
+        }
 
-    .details-container {
-        padding: 0;
-    }
+        .details-container {
+            padding: 0;
+        }
 
-    .clean {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 0;
-        table-layout: fixed;
-    }
+        .clean {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            table-layout: fixed;
+        }
 
-    .clean tr:nth-child(1),
-    .clean tr:nth-child(2) {
-        display: none;
-    }
+        .clean tr:nth-child(1),
+        .clean tr:nth-child(2) {
+            display: none;
+        }
 
-    .clean td {
-        padding: 10px 20px;
-        padding-left: 50px;
-        color: #333;
-        border-bottom: 1px solid #eee;
-        font-size: 0.9rem;
-    }
+        .clean td {
+            padding: 10px 20px;
+            padding-left: 50px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
 
-    .clean td:nth-child(2) {
-        color: #777;
-        width: 100px;
-    }
+        .clean td:nth-child(2) {
+            color: #777;
+            width: 100px;
+        }
 
-    .clean td:nth-child(3) {
-        font-weight: normal;
-    }
+        .clean td:nth-child(3) {
+            font-weight: normal;
+        }
 
-    .clean td:nth-child(4) {
-        font-weight: bold;
-        color: #333;
-        width: 50px;
-        text-align: right;
-    }
+        .clean td:nth-child(4) {
+            font-weight: bold;
+            color: #333;
+            width: 50px;
+            text-align: right;
+        }
 
-    .clean tr td:first-child {
-        width: 0;
-        padding: 0;
-    }
+        .clean tr td:first-child {
+            width: 0;
+            padding: 0;
+        }
 
-    .last_line_top_pruefungsgruppe {
-        display: table-row;
-        width: 100%;
-        box-sizing: border-box;
-        background-color: #fff;
-        border-top: 1px solid #ddd;
-        border-bottom: none;
-        margin: 0;
-    }
+        .last_line_top_pruefungsgruppe {
+            display: table-row;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-bottom: none;
+            margin: 0;
+        }
 
-    .last_line_top_pruefungsgruppe td {
-        border: none;
-        padding: 12px 20px;
-        background: transparent;
-        width: 100% !important;
-        text-align: center !important;
-        padding-left: 20px !important;
-    }
+        .last_line_top_pruefungsgruppe td {
+            border: none;
+            padding: 12px 20px;
+            background: transparent;
+            width: 100% !important;
+            text-align: center !important;
+            padding-left: 20px !important;
+        }
 
-    .last_line_top_pruefungsgruppe td:first-child {
-        font-weight: bold;
-        text-transform: none;
-        letter-spacing: normal;
-        font-size: 0.9rem;
-        color: #333;
-        display: inline-block;
-        padding: 0;
-        margin-right: 10px;
-    }
+        .last_line_top_pruefungsgruppe td:first-child {
+            font-weight: bold;
+            text-transform: none;
+            letter-spacing: normal;
+            font-size: 0.9rem;
+            color: #333;
+            display: inline-block;
+            padding: 0;
+            margin-right: 10px;
+        }
 
-    .last_line_top_pruefungsgruppe td:last-child {
-        font-weight: bold;
-        font-size: 1rem;
-        color: #007bff;
-        text-align: left;
-        margin-left: 0;
-        display: inline-block;
-        padding: 0;
-    }
+        .last_line_top_pruefungsgruppe td:last-child {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #007bff;
+            text-align: left;
+            margin-left: 0;
+            display: inline-block;
+            padding: 0;
+        }
 
-    .back-link {
-        text-align: center;
-        margin-top: 20px;
-    }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-    .back-link a {
-        color: #007bff;
-        text-decoration: none;
-        padding: 8px 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #fff;
-        display: inline-block;
-        transition: background-color 0.2s;
-        font-weight: bold;
-    }
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            display: inline-block;
+            transition: background-color 0.2s;
+            font-weight: bold;
+        }
 
-    .back-link a:hover {
-        background-color: #e9e9e9;
-        color: #0056b3;
-    }
-</style>
-```
-
+        .back-link a:hover {
+            background-color: #e9e9e9;
+            color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-```
-<div class="div_noten">
-    <script>
-        function toggleDetails(row) {
-            row.classList.toggle('active');
-            const detailsRow = row.nextElementSibling;
-            if (detailsRow && detailsRow.classList.contains('details-row')) {
-                detailsRow.classList.toggle('visible');
+    <div class="div_noten">
+        <script>
+            function toggleDetails(row) {
+                row.classList.toggle('active');
+                const detailsRow = row.nextElementSibling;
+                if (detailsRow && detailsRow.classList.contains('details-row')) {
+                    detailsRow.classList.toggle('visible');
+                }
             }
-        }
-    </script>
-    <table>
-        <tbody>
-            <tr class="subject-row" onclick="toggleDetails(this)">
-                <td>
-                    <span class="toggle-icon">&#9654;</span>
-                    <b>Deutsch</b>
-                </td>
-                <td><span class="grade-badge">4.850</span></td>
-            </tr>
-            <tr class="details-row">
-                <td colspan="2" class="details-container">
-                    <table class="clean"><tbody><tr><td></td></tr>
-```
-
+        </script>
+        <table>
+            <tbody>
+                <tr class="subject-row" onclick="toggleDetails(this)">
+                    <td>
+                        <span class="toggle-icon">&#9654;</span>
+                        <b>Deutsch</b>
+                    </td>
+                    <td><span class="grade-badge">4.850</span></td>
+                </tr>
+                <tr class="details-row">
+                    <td colspan="2" class="details-container">
+                        <table class="clean"><tbody><tr><td></td></tr>
 <tr><td></td></tr>
 <tr>
 <td></td>
@@ -248,19 +241,16 @@
                     </td>
                 </tr>
 
-```
-            <tr class="subject-row" onclick="toggleDetails(this)">
-                <td>
-                    <span class="toggle-icon">&#9654;</span>
-                    <b>Französisch</b>
-                </td>
-                <td><span class="grade-badge">3.300</span></td>
-            </tr>
-            <tr class="details-row">
-                <td colspan="2" class="details-container">
-                    <table class="clean"><tbody><tr><td></td></tr>
-```
-
+                <tr class="subject-row" onclick="toggleDetails(this)">
+                    <td>
+                        <span class="toggle-icon">&#9654;</span>
+                        <b>Französisch</b>
+                    </td>
+                    <td><span class="grade-badge">3.300</span></td>
+                </tr>
+                <tr class="details-row">
+                    <td colspan="2" class="details-container">
+                        <table class="clean"><tbody><tr><td></td></tr>
 <tr><td></td></tr>
 <tr>
 <td></td>
@@ -276,19 +266,16 @@
                     </td>
                 </tr>
 
-```
-            <tr class="subject-row" onclick="toggleDetails(this)">
-                <td>
-                    <span class="toggle-icon">&#9654;</span>
-                    <b>Finanz- und Rechnungswesen</b>
-                </td>
-                <td><span class="grade-badge">3.950</span></td>
-            </tr>
-            <tr class="details-row">
-                <td colspan="2" class="details-container">
-                    <table class="clean"><tbody><tr><td></td></tr>
-```
-
+                <tr class="subject-row" onclick="toggleDetails(this)">
+                    <td>
+                        <span class="toggle-icon">&#9654;</span>
+                        <b>Finanz- und Rechnungswesen</b>
+                    </td>
+                    <td><span class="grade-badge">3.950</span></td>
+                </tr>
+                <tr class="details-row">
+                    <td colspan="2" class="details-container">
+                        <table class="clean"><tbody><tr><td></td></tr>
 <tr><td></td></tr>
 <tr>
 <td></td>
@@ -310,19 +297,16 @@
                     </td>
                 </tr>
 
-```
-            <tr class="subject-row" onclick="toggleDetails(this)">
-                <td>
-                    <span class="toggle-icon">&#9654;</span>
-                    <b>Informatik</b>
-                </td>
-                <td><span class="grade-badge">5.500</span></td>
-            </tr>
-            <tr class="details-row">
-                <td colspan="2" class="details-container">
-                    <table class="clean"><tbody><tr><td></td></tr>
-```
-
+                <tr class="subject-row" onclick="toggleDetails(this)">
+                    <td>
+                        <span class="toggle-icon">&#9654;</span>
+                        <b>Informatik</b>
+                    </td>
+                    <td><span class="grade-badge">5.500</span></td>
+                </tr>
+                <tr class="details-row">
+                    <td colspan="2" class="details-container">
+                        <table class="clean"><tbody><tr><td></td></tr>
 <tr><td></td></tr>
 <tr>
 <td></td>
@@ -350,19 +334,16 @@
                     </td>
                 </tr>
 
-```
-            <tr class="subject-row" onclick="toggleDetails(this)">
-                <td>
-                    <span class="toggle-icon">&#9654;</span>
-                    <b>Sport</b>
-                </td>
-                <td><span class="grade-badge">5.250</span></td>
-            </tr>
-            <tr class="details-row">
-                <td colspan="2" class="details-container">
-                    <table class="clean"><tbody><tr><td></td></tr>
-```
-
+                <tr class="subject-row" onclick="toggleDetails(this)">
+                    <td>
+                        <span class="toggle-icon">&#9654;</span>
+                        <b>Sport</b>
+                    </td>
+                    <td><span class="grade-badge">5.250</span></td>
+                </tr>
+                <tr class="details-row">
+                    <td colspan="2" class="details-container">
+                        <table class="clean"><tbody><tr><td></td></tr>
 <tr><td></td></tr>
 <tr>
 <td></td>
@@ -384,19 +365,16 @@
                     </td>
                 </tr>
 
-```
-            <tr class="subject-row" onclick="toggleDetails(this)">
-                <td>
-                    <span class="toggle-icon">&#9654;</span>
-                    <b>Wirtschaft und Recht</b>
-                </td>
-                <td><span class="grade-badge">4.200</span></td>
-            </tr>
-            <tr class="details-row">
-                <td colspan="2" class="details-container">
-                    <table class="clean"><tbody><tr><td></td></tr>
-```
-
+                <tr class="subject-row" onclick="toggleDetails(this)">
+                    <td>
+                        <span class="toggle-icon">&#9654;</span>
+                        <b>Wirtschaft und Recht</b>
+                    </td>
+                    <td><span class="grade-badge">4.200</span></td>
+                </tr>
+                <tr class="details-row">
+                    <td colspan="2" class="details-container">
+                        <table class="clean"><tbody><tr><td></td></tr>
 <tr><td></td></tr>
 <tr>
 <td></td>
@@ -424,19 +402,16 @@
                     </td>
                 </tr>
 
-```
-            <tr class="subject-row" onclick="toggleDetails(this)">
-                <td>
-                    <span class="toggle-icon">&#9654;</span>
-                    <b>Neues Fach</b>
-                </td>
-                <td><span class="grade-badge">3.200</span></td>
-            </tr>
-            <tr class="details-row">
-                <td colspan="2" class="details-container">
-                    <table class="clean"><tbody><tr><td></td></tr>
-```
-
+                <tr class="subject-row" onclick="toggleDetails(this)">
+                    <td>
+                        <span class="toggle-icon">&#9654;</span>
+                        <b>Mathematik</b>
+                    </td>
+                    <td><span class="grade-badge">3.200</span></td>
+                </tr>
+                <tr class="details-row">
+                    <td colspan="2" class="details-container">
+                        <table class="clean"><tbody><tr><td></td></tr>
 <tr><td></td></tr>
 <tr>
 <td></td>
@@ -464,14 +439,11 @@
                     </td>
                 </tr>
 
-```
-        </tbody>
-    </table>
-    <div class="back-link">
-        <a href="index.html">← Zurück zur Navigation</a>
+            </tbody>
+        </table>
+        <div class="back-link">
+            <a href="index.html">← Zurück zur Navigation</a>
+        </div>
     </div>
-</div>
-```
-
 </body>
 </html>
